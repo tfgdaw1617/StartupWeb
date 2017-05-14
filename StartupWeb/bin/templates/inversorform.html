@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Demo Inversores</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <link href="../static/css/style.css"
+          th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>Modificar Inversor</h1>
+            <div>
+                <form th:object="${inversor}" th:action="@{/inversor/{id}/edit(id=${inversor.id})}" method="post"  class="form-horizontal"
+                enctype="multipart/form-data">
+                    <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Nombre</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="nombre"
+                                th:value="${inversor.nombre}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Apellido</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="apellido"
+                                th:value="${inversor.apellido}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="email"
+                                th:value="${inversor.email}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Importe</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="importe"
+                                th:value="${inversor.importe}" />
+                        </div>
+                    </div>
+            		<div class="form-group">
+	                    <label class="col-lg-3 control-label">Proyectos</label>
+	                    <div class="col-lg-9">
+                            <div th:each="ip : ${inversor.inversorProyectos}">
+                                <span th:text="${ip.fechaRegistro}" /> -
+                                <span th:text="${ip.proyecto.titulo}" /> -
+                                <span th:text="${ip.proyecto.descripcion}" /> -
+                                <span th:text="${ip.importe}" />
+                            </div>
+	                    </div>
+	                </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary" name="button">Modificar</button>
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>        
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+html,
+body {
+    /*css for full size background image*/
+	font-family: 'Raleway',serif;
+    height: 100%;
+
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+    background: url('../images/businessBackground.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: table;
+    width: 100%;
+    height: 100%; /* For at least Firefox */
+    min-height: 100%;
+    -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+.site-wrapper-inner {
+    display: table-cell;
+    vertical-align: top;
+}
+.cover-container {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Padding for spacing */
+.inner {
+    padding: 30px;
+    text-align: center;
+}
+
+.cover {
+    padding: 0 20px;
+}
+.cover .btn-lg {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+.services img {
+    width: auto;
+    max-width: 550px;
+}
+.box-right {
+    margin: 20px 0px;
+}
+.box-right .section-heading{
+    margin-top: 10px;
+}
+@media(min-width:768px) {
+    .box-right .section-heading {
+        margin-top: 100px;
+    }
+}
+.box-left{
+    margin: 20px 0px;
+}
+.box-left .section-heading{
+    margin-top: 10px;
+}
+@media(min-width:768px) {
+    .box-left .section-heading {
+        margin-top: 100px;
+    }
+}
+
+.site-wrapper-inner {
+    vertical-align: middle;
+}
+.site-wrapper-inner img{
+	position: absolute;
+	top: 50px;
+	left: 50px;
+}
+.row{
+	margin: 50px;
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+.btn-info{
+	margin: 0 auto;
+    display: table;
+}
+.img-circle{
+	height:304px; 
+	width:304px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.buttonSlideDown{
+	cursor:pointer;
+	padding: 5px;
+	border: 1px solid black;
+	margin-top: 20px;
+	-webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    transition: 0.5s ease;
+}
+.buttonSlideDown:hover{
+    background: #eaeaea;
+}
+.box{
+    margin-top: 10px;
+    display: none;
+}
+#fotoParallax{
+	background: url('../images/businessBackground2.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: table;
+    width: 100%;
+    text-align: center;
+}
+#fotoParallax p{
+	color: white;
+	padding: 100px 0px 100px 0px;
+	font-size: 1.5em;
+    letter-spacing: 2px;
+}
+.navbar-bottom{
+	margin: 0px;
+	height: 250px;
+}
