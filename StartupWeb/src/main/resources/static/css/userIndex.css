@@ -1,0 +1,289 @@
+// Simple reset
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// Variables
+
+$primary-color: #2C3E50;
+$profits-color: #2980B9;
+$expenses-color: #9B59B6;
+
+// Mixins
+
+@mixin font-size($sizeValue) {
+    font-size: $sizeValue + px;
+    font-size: $sizeValue / 16 * 1 + rem;
+}
+
+@mixin font-size-important($sizeValue) {
+    font-size: ($sizeValue + px) !important;
+    font-size: $sizeValue / 16 * 1 + rem;
+}
+
+// Default styles
+
+html, body {
+    background: $primary-color;
+    font-family: "Source Sans Pro", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+header {
+  position: absolute;
+  right: 0;
+  height: 0;
+}
+
+.account {
+    margin: 20px 150px;
+    img {
+        float: right;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+    p {
+        float: right;
+        color: #FFF;
+        margin: 7px -160px;
+        font-size: 15px;
+    }
+}
+
+.account-box:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid darken($primary-color, 7%);
+    margin: -7px 34px;
+    float: right;
+}
+
+.account-box {
+    background: darken($primary-color, 7%);
+    border-radius: 3px;
+    width: 80%;
+    height: 300px;
+    border: none;
+    margin: 50px 60px;
+    position: absolute;
+    h3 {
+        text-align: center;
+        color: #FFF;
+        padding: 20px;
+        font-weight: 300;
+        border-bottom: 1px solid darken($primary-color, 5%);
+    }
+    li {
+        list-style: none;
+        padding: 15px;
+        width: 38.8%;
+        float: left;
+        transition: all ease 0.4s;
+    }
+    li:hover {
+        background: darken($primary-color, 5%);
+    }
+    a {
+        text-decoration: none;
+        color: #FFF;
+    }
+}
+
+aside {
+    background: darken($primary-color, 5%);
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    h1 {
+        font-family: 'Pacifico', cursive;
+        color: #FFF;
+        text-align: center;
+        margin-top: 20px;
+        @include font-size(40);
+    }
+    ul {
+        margin: 40px 0;
+    }
+    li {
+        list-style: none;
+        padding: 9px;
+        margin-top: 10px;
+        transition: all ease 0.4s;
+    }
+    li.active {
+        background: darken($primary-color, 10%);
+    }
+    li:hover {
+        background: darken($primary-color, 10%);
+    }
+    a {
+        color: #FFF;
+        text-decoration: none;
+        font-size: 12.5px;
+        padding-left: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        @include font-size(12.5);
+    }
+}
+
+.notification {
+    background: #2980B9;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 100%;
+    color: #FFF;
+    font-weight: 400;
+    float: right;
+    margin-top: -2px;
+    margin-right: 10px;
+    @include font-size(14);
+}
+
+.dashboard {
+    background: $primary-color;
+    width: 80%;
+    height: 100vh;
+    float: right;
+}
+
+canvas {
+    margin: -50px -5px;
+    width: 101% !important;
+}
+
+// Row Styles
+
+.row {
+    width: 100%;
+    margin-top: 41px;
+    p {
+        float: left;
+        margin: -110px 150px;
+        color: #FFF;
+        font-weight: 400;
+        width: 60%;
+        @include font-size(14);
+    }
+}
+
+.profits {
+    background: darken($primary-color, 2%);
+    width: 50%;
+    height: auto;
+    float: left;
+}
+
+.expenses {
+    background: darken($primary-color, 5%);
+    width: 50%;
+    height: auto;
+    float: right;
+}
+
+.info {
+    padding: 25px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 10px solid darken($primary-color, 3%);
+    color: #FFF;
+}
+
+.c-profits {
+    background: transparent;
+    border-top-color: $profits-color;
+    border-right-color: $profits-color;
+    border-bottom-color: $profits-color;
+}
+
+.c-expenses {
+    background: transparent;
+    border-top-color: $expenses-color;
+    border-right-color: $expenses-color;
+}
+
+// Font Awesome styles
+
+.fa {
+    color: #FFF;
+    padding-right: 10px;
+    @include font-size-important(12.5);
+}
+
+.fa.fa-caret-down {
+    margin: 0 10px;
+}
+
+.fa.fa-bars {
+    float: right;
+    margin: 30px 20px;
+    visibility: hidden;
+    @include font-size-important(20);
+}
+
+@media screen and (max-width: 1100px) {
+    aside {
+        visibility: hidden;
+    }
+    .profits, .expenses {
+        width: 100%;
+    }
+    .dashboard {
+        width: 100%;
+        margin-top: 50px;
+    }
+    .account {
+        visibility: hidden;
+    }
+    .menu {
+        width: 100vw;
+        height: 100vh;
+        background: $primary-color;
+        margin: 0 0;
+        padding-bottom: 60px;
+        ul {
+            margin: -50px 30px;
+            text-align: left;
+        }
+        li {
+            list-style: none;
+            padding: 20px 0;
+            margin: 0 0;
+        }
+        a {
+            text-decoration: none;
+            color: #FFF;
+        }
+        p {
+            background: darken($primary-color, 4%);
+            padding: 20px;
+            color: #FFF;
+            text-align: center;
+            margin: 90px 0;
+            font-weight: 700;
+        }
+    }
+    .fa.fa-bars {
+        visibility: visible;
+    }
+}
