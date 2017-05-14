@@ -1,7 +1,9 @@
 .gradle
 /build/
-bin
+/bin/
 gradle
+.DS_Store
+WEB-INF
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
