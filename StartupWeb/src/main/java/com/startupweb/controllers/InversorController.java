@@ -84,7 +84,6 @@ public class InversorController {
     @RequestMapping(value="inversor/{id}/edit", method=RequestMethod.POST)
     public String postEditInversor(@PathVariable Long id, Inversor i){
         Inversor inversor = inversorRepository.findOne(id);
-        inversor.setEmail(i.getEmail());
         inversor.setNombre(i.getNombre());
         inversor.setApellido(i.getApellido());
         inversor.setImporte(i.getImporte());

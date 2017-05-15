@@ -20,9 +20,7 @@ public class Inversor {
 
 	private long id;
 	private String nombre;
-	private String pass;
 	private String apellido;
-	private String email;
 	private Long importe;
 	private Set<InversorProyecto> inversorProyectos = new HashSet<>();
 	private User user;
@@ -30,12 +28,10 @@ public class Inversor {
 	public Inversor() {
 	}
 
-	public Inversor(String nombre, String apellido,String pass, String email, Long importe, User user) {
+	public Inversor(String nombre, String apellido, Long importe, User user) {
 
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.pass = pass;
-		this.email = email;
 		this.importe = importe;
 		this.user = user;
 	}
@@ -67,14 +63,6 @@ public class Inversor {
 		this.apellido = apellido;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public Long getImporte() {
 		return importe;
 	}
@@ -103,14 +91,6 @@ public class Inversor {
 		  }
 		}
 		return false;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
 	}
 	
 	@OneToOne(mappedBy = "inversor")

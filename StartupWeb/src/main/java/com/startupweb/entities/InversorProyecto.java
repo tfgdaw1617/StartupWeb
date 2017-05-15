@@ -1,18 +1,15 @@
 package com.startupweb.entities;
 
-import java.util.Objects;
 import java.util.Date;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
-import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.util.Date;
 
 @Entity
 @Table(name = "INVERSOR_PROYECTO")

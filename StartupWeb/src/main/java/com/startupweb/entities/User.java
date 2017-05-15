@@ -24,13 +24,14 @@ public class User {
 	private String email;
 	private Set<Rol> roles;
 	private Inversor inversor;
+	private Empresa empresa;
 	
 	
 	public User() {
 		super();
 	}
 	
-	public User(String nombre, String pass, Integer telefono, String email, Set<Rol> roles, Inversor inversor) {
+	public User(String nombre, String pass, Integer telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa) {
 		super();
 		this.nombre = nombre;
 		this.pass = pass;
@@ -38,6 +39,7 @@ public class User {
 		this.email = email;
 		this.roles = roles;
 		this.inversor = inversor;
+		this.empresa = empresa;
 	}
 	
 	@Id
@@ -92,6 +94,16 @@ public class User {
 
 	public void setInversor(Inversor inversor) {
 		this.inversor = inversor;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "EMPRESA_ID")
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 	
 
