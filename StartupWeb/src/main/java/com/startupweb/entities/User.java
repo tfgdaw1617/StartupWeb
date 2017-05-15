@@ -1,8 +1,5 @@
 package com.startupweb.entities;
 
-//import java.util.List;
-//import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,7 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,18 +22,22 @@ public class User {
 	private String pass;
 	private Integer telefono;
 	private String email;
+	private Set<Rol> roles;
+	private Inversor inversor;
 	
 	
 	public User() {
 		super();
 	}
 	
-	public User(String nombre, String pass, Integer telefono, String email) {
+	public User(String nombre, String pass, Integer telefono, String email, Set<Rol> roles, Inversor inversor) {
 		super();
 		this.nombre = nombre;
 		this.pass = pass;
 		this.telefono = telefono;
 		this.email = email;
+		this.roles = roles;
+		this.inversor = inversor;
 	}
 	
 	@Id
@@ -70,6 +74,24 @@ public class User {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "ROL_ID"))
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
+	}
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "INVERSOR_ID")
+	public Inversor getInversor() {
+		return inversor;
+	}
+
+	public void setInversor(Inversor inversor) {
+		this.inversor = inversor;
 	}
 	
 

@@ -1,6 +1,6 @@
 .gradle
 /build/
-/bin/
+bin
 gradle
 .DS_Store
 WEB-INF
@@ -10,7 +10,6 @@ WEB-INF
 .apt_generated
 .classpath
 .factorypath
-.project
 .settings
 .springBeans
 

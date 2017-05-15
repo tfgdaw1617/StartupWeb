@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,17 +25,19 @@ public class Inversor {
 	private String email;
 	private Long importe;
 	private Set<InversorProyecto> inversorProyectos = new HashSet<>();
+	private User user;
 
 	public Inversor() {
 	}
 
-	public Inversor(String nombre, String apellido,String pass, String email, Long importe) {
+	public Inversor(String nombre, String apellido,String pass, String email, Long importe, User user) {
 
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.pass = pass;
 		this.email = email;
 		this.importe = importe;
+		this.user = user;
 	}
 
     @Id
@@ -108,6 +111,15 @@ public class Inversor {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+	
+	@OneToOne(mappedBy = "inversor")
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
