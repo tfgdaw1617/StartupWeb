@@ -19,6 +19,7 @@ public class Inversor {
 
 	private long id;
 	private String nombre;
+	private String pass;
 	private String apellido;
 	private String email;
 	private Long importe;
@@ -27,10 +28,11 @@ public class Inversor {
 	public Inversor() {
 	}
 
-	public Inversor(String nombre, String apellido, String email, Long importe) {
+	public Inversor(String nombre, String apellido,String pass, String email, Long importe) {
 
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.pass = pass;
 		this.email = email;
 		this.importe = importe;
 	}
@@ -98,6 +100,14 @@ public class Inversor {
 		  }
 		}
 		return false;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 }
