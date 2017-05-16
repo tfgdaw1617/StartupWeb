@@ -1,5 +1,5 @@
 .gradle
-**/bin/
+
 /build/
 gradle
 .DS_Store
@@ -14,6 +14,7 @@ WEB-INF
 .springBeans
 
 ### IntelliJ IDEA ###
+.project
 .idea
 *.iws
 *.iml
