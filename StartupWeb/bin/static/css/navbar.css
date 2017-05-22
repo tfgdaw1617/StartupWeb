@@ -1,26 +1,82 @@
-.navbar-default {
-    border-color: rgba(35,35,35,.05);
-    font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
-    background-color: #222;
-    -webkit-transition: all .4s;
-    -moz-transition: all .4s;
-    transition: all .4s;
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+html, body{
+height: 100%;
+font-family: Raleway, Helvetica, sans-serif;
+letter-spacing: 1px;
 }
-
-.navbar-header > .navbar-brand {
-    font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
-    color: #9c27b0;
-    padding: 15px;
-    -webkit-transition: padding .2s ease-in;
-    -moz-transition: padding .2s ease-in;
-    transition: padding .2s ease-in;
+.well{
+	background-color: white;
+	border-color: #25b0e1;
+	padding: 0px;
 }
-
-
-@media(min-width:768px) {
-    .navbar-default {
-        border-color: transparent;
-        background-color: transparent;
-        min-height: 60px;
-    }
+.container-fluid{
+	height: 100%;
+}
+.row.content {
+	height: 100%;
+}
+.col-sm-9{
+	margin-top: 10px;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: white;
+}
+/* On small screens, set height to 'auto' for the grid */
+@media screen and (max-width: 767px) {
+	.row.content {
+		height: auto;
+	}
+}
+/* Set gray background color and 100% height */
+.sidenav {
+	background-color: #219eca;
+	height: 100%;
+} 
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: inherit;
+}
+.sidenav a{
+	letter-spacing: 2px;
+	font-size: 1.2em;
+	color: white;
+}
+.menuItem{
+	margin-left: -15px !important;
+	padding: 5px 0px 5px 15px;
+}
+.menuItem:active, .menuItem:focus, .menuItem:hover{
+	border-left: 3px solid white;
+}
+.sidenav .img-responsive{
+    display: table;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 180px;
+}
+.navbar-inverse{
+	background-color: #219eca !important;
+	border: none;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: white;
+}
+.img-responsive{
+	width: 180px;
+    margin: 5px 0px 0px 10px;
+}
+.navbar-inverse a{
+	color: white !important;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: white;
+	text-align: center;
+}
+inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: inherit;
+}
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: inherit;
 }

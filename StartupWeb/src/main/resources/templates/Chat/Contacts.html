@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>StartupWeb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+<link href="../static/css/navbar.css" th:href="@{/css/navbar.css}"
+	rel="stylesheet" media="screen" />
+<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
+<link href="../../static/css/contacts.css"
+	th:href="@{/css/contacts.css}" rel="stylesheet" media="screen" />
+<script src="../static/js/contacts.js" th:src="@{/js/contacts.js}"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-3 sidenav hidden-xs">
+				<!--/*/ <th:block th:include="fragments/headerLeft :: headerLeft"></th:block> /*/-->
+			</div>
+			<div class="col-sm-9">
+				<div class="well">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<input type="search" class="form-control" id="input-search"
+									placeholder="Busca en tu red de contactos" />
+							</div>
+							<div class="searchable-container">
+								<div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
+									<div class="info-block block-info clearfix">
+										<div class="square-box pull-left">
+											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
+										</div>
+										<h5>Empresa 1</h5>
+										<h4>Nombre: Carlos A</h4>
+										<p>Cargo: Director</p>
+										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
+									</div>
+								</div>
+								<div
+									class="items col-xs-12 col-sm-12 col-md-6 col-lg-6 clearfix">
+									<div class="info-block block-info clearfix">
+										<div class="square-box pull-left">
+											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
+										</div>
+										<h5>Empresa 2</h5>
+										<h4>Nombre: Juan 2</h4>
+										<p>Cargo: General Manager</p>
+										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
+									</div>
+								</div>
+								<div class="items col-xs-12 col-sm-12 col-md-6 col-lg-6">
+									<div class="info-block block-info clearfix">
+										<div class="square-box pull-left">
+											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
+										</div>
+										<h5>Empresa 3</h5>
+										<h4>Nombre: Julio 3</h4>
+										<p>Cargo: Director financiero</p>
+										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
+									</div>
+								</div>
+								<div class="items col-xs-12 col-sm-12 col-md-6 col-lg-6">
+									<div class="info-block block-info clearfix">
+										<div class="square-box pull-left">
+											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
+										</div>
+										<h5>Fundación 4</h5>
+										<h4>Nombre: Alejandro B</h4>
+										<p>Cargo: Director</p>
+										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

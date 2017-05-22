@@ -1,22 +1,101 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-<title>Demo Inversores</title>
+<title>StartupWeb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="../static/css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
 <link href="../static/css/navbar.css" th:href="@{/css/navbar.css}"
 	rel="stylesheet" media="screen" />
-<script src="../static/js/jquery.min.js"
-	th:src="@{/js/jquery.min.js}"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-<script src="../static/js/navbar.js" th:src="@{/js/navbar.js}" ></script>
+<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
 <link href="../../static/css/userIndex.css"
 	th:href="@{/css/userIndex.css}" rel="stylesheet" media="screen" />
 <script src="../static/js/userIndex.js" th:src="@{/js/userIndex.js}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
-<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-3 sidenav hidden-xs">
+				<!--/*/ <th:block th:include="fragments/headerLeft :: headerLeft"></th:block> /*/-->
+			</div>
+			<div class="col-sm-9">
+				<div class="well" >
+					<h2>Información específica</h2>
+					<div class="row" id="infoEmpresa">
+						<div class="col-sm-4">
+							<img src="../static/images/logos/SW_Entero_Blue.png"
+							th:src="@{/images/logos/SW_Entero_Blue.png}" class="img-responsive"
+							alt="Logo empresa" />
+							<h4>StartupWeb.SL</h4>
+						</div>
+						<div class="col-sm-4" style="text-align: left">
+							<p>Dirección: Carrer Taller número X</p>
+							<p>Teléfono: 690109484</p>
+							<p>CIF: X46992850Ñ</p>
+							<p>Proyectos Activos: 3</p>
+						</div>
+						<div class="col-sm-4" style="text-align: left">
+							<p>País: España</p>
+							<p>Población: Barcelona</p>
+							<p>Año fundación: 2017</p>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<div class="well">
+					<h2>Proyectos activos</h2>
+					<div class="skillbar clearfix " data-percent="65%">
+						<div class="skillbar-title" style="background: #25b0e1;">
+							<span>Proyecto 1</span>
+						</div>
+						<div class="skillbar-bar" style="background: #25b0e1;"></div>
+						<div class="skill-bar-percent">65%</div>
+					</div>
+					<div class="skillbar clearfix " data-percent="85%">
+						<div class="skillbar-title" style="background: #25b0e1;">
+							<span>Pryotecto 2</span>
+						</div>
+						<div class="skillbar-bar" style="background: #25b0e1;"></div>
+						<div class="skill-bar-percent">85%</div>
+					</div>
+					<div class="skillbar clearfix " data-percent="60%">
+						<div class="skillbar-title" style="background: #25b0e1;">
+							<span>Proyecto 3</span>
+						</div>
+						<div class="skillbar-bar" style="background: #25b0e1;"></div>
+						<div class="skill-bar-percent">60%</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="well">
+							<h2>Visitantes</h2>
+							<div id="visitas">
+								<span class="count">200</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="well">
+							<h2>Mensajes pendientes</h2>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="well">
+							<h2>Últimas noticias</h2>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

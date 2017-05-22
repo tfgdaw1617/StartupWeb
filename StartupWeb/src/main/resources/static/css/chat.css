@@ -1,0 +1,25 @@
+.well{
+	border:none;
+}
+.container {
+    width: 100%;
+    background-color: white;
+}
+.panel-default{
+	padding: 0px;
+}
+.message-bubble 
+{
+    padding: 10px 0px 10px 0px;
+}
+
+.message-bubble:nth-child(even) { background-color: #F5F5F5; }
+
+.message-bubble > *
+{
+    padding-left: 10px;    
+}
+
+.panel-body { padding: 0px; }
+
+.panel-heading { background-color: #219eca !important; color: white !important; }

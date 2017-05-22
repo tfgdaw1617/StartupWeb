@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,13 +26,16 @@ public class User {
 	private Set<Rol> roles;
 	private Inversor inversor;
 	private Empresa empresa;
+	private Set<Conversacion> conversaciones;
+	private Set<Mensaje> mensajesFrom;
+	private Set<Mensaje> mensajesTo;
 	
 	
 	public User() {
 		super();
 	}
 	
-	public User(String nombre, String pass, Integer telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa) {
+	public User(String nombre, String pass, Integer telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo) {
 		super();
 		this.nombre = nombre;
 		this.pass = pass;
@@ -40,6 +44,9 @@ public class User {
 		this.roles = roles;
 		this.inversor = inversor;
 		this.empresa = empresa;
+		this.conversaciones = conversaciones;
+		this.mensajesFrom = mensajesFrom;
+		this.setMensajesTo(mensajesTo);
 	}
 	
 	@Id
@@ -106,5 +113,32 @@ public class User {
 		this.empresa = empresa;
 	}
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuarios_conversaciones", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "conversacion_id", referencedColumnName = "CONVERSACION_ID"))
+	public Set<Conversacion> getConversaciones() {
+		return conversaciones;
+	}
+
+	public void setConversaciones(Set<Conversacion> conversaciones) {
+		this.conversaciones = conversaciones;
+	}
+	
+	@OneToMany(mappedBy = "userFrom", cascade = CascadeType.ALL)
+	public Set<Mensaje> getMensajesFrom() {
+		return mensajesFrom;
+	}
+
+	public void setMensajesFrom(Set<Mensaje> mensajesFrom) {
+		this.mensajesFrom =mensajesFrom;
+	}
+
+	@OneToMany(mappedBy = "userTo", cascade = CascadeType.ALL)
+	public Set<Mensaje> getMensajesTo() {
+		return mensajesTo;
+	}
+
+	public void setMensajesTo(Set<Mensaje> mensajesTo) {
+		this.mensajesTo = mensajesTo;
+	}
 
 }

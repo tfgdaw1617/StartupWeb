@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bootstrap Example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+	height: 550px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+	background-color: #f1f1f1;
+	height: 100%;
+}
+
+/* On small screens, set height to 'auto' for the grid */
+@media screen and (max-width: 767px) {
+	.row.content {
+		height: auto;
+	}
+}
+</style>
+</head>
+<body>
+	<div th:fragment="headerLeft">
+		<a href="#" th:href="@{/access}"><img
+			src="../static/images/logos/SW_Vertical.png"
+			th:src="@{/images/logos/SW_Vertical.png}" class="img-responsive"
+			alt="Logo" /></a>
+		<hr />
+		<ul class="nav nav-pills nav-stacked">
+			<li class="menuItem"><a href="#section1"><i
+					class="fa fa-line-chart" aria-hidden="true"></i> Inversiones</a></li>
+			<li class="menuItem"><a href="#section2"><i
+					class="fa fa-users" aria-hidden="true"></i> Mi red</a></li>
+			<li class="menuItem"><a href="#section3"><i
+					class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
+			<li class="menuItem"><a href="#" th:href="@{/Mensajes}"><i
+					class="fa fa-paper-plane-o" aria-hidden="true"></i> Conversaciones</a></li>
+			<li class="menuItem"><a href="#section3"><i
+					class="fa fa-user-circle-o" aria-hidden="true"></i> Mi cuenta</a></li>
+			<li class="menuItem"><a href="#section3"><i
+					class="fa fa-user-times" aria-hidden="true"></i> Cerrar sesión</a></li>
+		</ul>
+		<br />
+	</div>
+</body>
+</html>
