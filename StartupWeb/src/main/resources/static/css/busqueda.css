@@ -1,0 +1,107 @@
+body
+{
+
+    background-color: #F7F7F7;
+}
+.acordion{
+	
+}
+.col-sm-9{
+	padding: 0px;
+	margin: 0px; 
+}
+.post
+{
+    background-color: #FFF;
+    overflow: hidden;
+    box-shadow: 0 0 1px #CCC;
+}
+.post img
+{
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+}
+.post .content
+{
+    padding: 15px;
+}
+.post .author
+{
+    font-size: 11px;
+    color: #737373;
+    padding: 25px 30px 20px;
+}
+.post .post-img-content
+{
+    height: 196px;
+    position: relative;
+}
+.post .post-img-content img
+{
+    position: absolute;
+}
+.post .post-title
+{
+    display: table-cell;
+    vertical-align: bottom;
+    z-index: 2;
+    position: relative;
+}
+.post .post-title b
+{
+    background-color: rgba(51, 51, 51, 0.58);
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #FFF;
+    margin-top: 5px;
+}
+#busquedaTitle{
+    border-radius: 3px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 10px;
+}
+#mySidenav{
+	display: none;
+	width: 100vh;
+	width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px; 
+	
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+#filtro{
+	background: #219eca;
+    color: white;
+    display: table;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+div#filtroForm {
+	display:none;
+    border: 1px solid #219eca;
+    border-radius: 5px;
+    padding: 10px;
+}
+.container {
+    width: inherit !important;
+}
+.well{
+	border:none;
+}
+.row{
+
+}

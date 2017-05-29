@@ -1,83 +1,22 @@
-@charset "utf-8";
-/* CSS Document */
-
-/* ---------- FONTAWESOME ---------- */
-/* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
-/* ---------- http://weloveiconfonts.com/ ---------- */
-
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-
-/* ---------- ERIC MEYER'S RESET CSS ---------- */
-/* ---------- http://meyerweb.com/eric/tools/css/reset/ ---------- */
-
-@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
-
-/* ---------- FONTAWESOME ---------- */
-
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
+.container{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -150px 0 0 -150px;
+	width:300px;
+	height:300px;
 }
-
-/* ---------- GENERAL ---------- */
-
-body {
-	background: #f4f4f4;
-	color: #5a5656;
-	font: 100%/1.5em 'Open Sans', sans-serif;
-  margin: 0;
-}
-
-a { text-decoration: none; }
-
-h1 { font-size: 1em; }
-
-h1, p {
-	margin-bottom: 10px;
-}
-
-strong {
-	font-weight: bold;
-}
-
-.uppercase { text-transform: uppercase; }
-
-/* ---------- LOGIN ---------- */
-
-#login {
-	margin: 50px auto;
-	width: 300px;
-}
-
-form fieldset input[type="text"], input[type="password"] {
-	background: #e5e5e5;
+.btn-primary{
+	background: #25b9e9;
 	border: none;
-	border-radius: 3px;
-	color: #5a5656;
-	font-family: inherit;
-	font-size: 14px;
-	height: 50px;
-	outline: none;
-	padding: 0px 10px;
-	width: 280px;
-  -webkit-appearance:none;
+	-webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    transition: 0.5s ease;
 }
-
-form fieldset input[type="submit"] {
-	background-color: #008dde;
-	border: none;
-	border-radius: 3px;
-	color: #f4f4f4;
-	cursor: pointer;
-	font-family: inherit;
-	height: 50px;
-	text-transform: uppercase;
-	width: 300px;
-  -webkit-appearance:none;
+.btn-primary:hover {
+    color: #fff;
+    background-color: #5ea2dc;
+    border-color: #204d74;
 }
-
-form fieldset a {
-	color: #5a5656;
-	font-size: 10px;
-}
-
-form fieldset a:hover { text-decoration: underline; }

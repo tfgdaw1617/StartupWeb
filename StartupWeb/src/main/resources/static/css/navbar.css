@@ -32,6 +32,7 @@ letter-spacing: 1px;
 .sidenav {
 	background-color: #219eca;
 	height: 100%;
+	position: fixed;
 } 
 .nav>li>a:focus, .nav>li>a:hover {
     text-decoration: none;
@@ -79,4 +80,12 @@ inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
 }
 .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
     background-color: inherit;
+}
+
+@media(min-width:768px) {
+	.col-sm-9 {
+	    margin-top: 10px;
+	    position: relative;
+	    left: 25%;
+	}
 }

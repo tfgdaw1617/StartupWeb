@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>StartupWeb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+<link href="../static/css/navbar.css" th:href="@{/css/navbar.css}"
+	rel="stylesheet" media="screen" />
+<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
+<link href="../../static/css/configuracion.css"
+	th:href="@{/css/configuracion.css}" rel="stylesheet" media="screen" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-3 sidenav hidden-xs">
+				<!--/*/ <th:block th:include="fragments/headerLeft :: headerLeft"></th:block> /*/-->
+			</div>
+			<div class="col-sm-9">
+				<div class="well">
+					<div class="container">
+						<form class="form-horizontal">
+							<fieldset>
+
+								<!-- Form Name -->
+								<legend>Configuración de usuario</legend>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="f_name">Nombre</label>
+									<div class="col-md-6">
+										<input id="f_name" name="f_name" type="text"
+											placeholder="Nombre"
+											class="form-control input-md" required="" />
+									</div>
+								</div>
+								<!-- Prepended text-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="f_income">Correo electrónico</label>
+									<div class="col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon">Rs.</span> <input
+												id="f_income" name="f_income" class="form-control"
+												placeholder="Correo electrónico" type="email" required="" />
+										</div>
+										<p class="help-block">Introduce un correo electrónico válido</p>
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="m_name">Teléfono</label>
+									<div class="col-md-6">
+										<input id="m_name" name="m_name" type="text"
+											placeholder="Teléfono" class="form-control input-md"
+											required="" /> <span class="help-block"></span>
+									</div>
+								</div>
+
+								<!-- Prepended text-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="m_income">Edad</label>
+									<div class="col-md-6">
+										<div class="input-group">
+											<span class="input-group-addon">Años</span> <input
+												id="m_income" name="m_income" class="form-control"
+												placeholder="Introduce tu edad" type="text" required="" />
+										</div>
+									</div>
+								</div>
+
+								<!-- Select Basic -->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="gender">Tipo de usuario</label>
+									<div class="col-md-6">
+										<select id="gender" name="gender" class="form-control">
+											<option value="MALE">Inversor</option>
+											<option value="FEMALE">Empresa</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="dob">Dirección</label>
+									<div class="col-md-6">
+										<input id="dob" name="dob" type="text"
+											placeholder="Dirección" class="form-control input-md"
+											required="" /> <span class="help-block">Please choose
+											your from the calender </span>
+									</div>
+								</div>
+
+								<!-- Select Basic -->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="pwd">Perfil público</label>
+									<div class="col-md-6">
+										<select id="pwd" name="pwd" class="form-control">
+											<option value="NO">No</option>
+											<option value="YES">Sí</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="ph_cat">Cantidad a invertir</label>
+									<div class="col-md-6">
+										<input id="ph_cat" name="ph_cat" type="text"
+											placeholder="Cantidad a invertir"
+											class="form-control input-md" required="" />
+									</div>
+								</div>
+
+
+
+								<!-- Button (Double) -->
+								<div class="form-group">
+									<label class="col-md-4 control-label"></label>
+
+									<div class="col-md-8">
+										<input type="reset" class="btn btn-primary btn-lg " id="reset"
+											name="reset" value="Restaurar" />  <input
+											type="submit" class="btn btn-success btn-lg " id="submit"
+											name="submitb" value="Guardar"
+											onclick="return confirm('Are you sure you want to commit ?')" />
+
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

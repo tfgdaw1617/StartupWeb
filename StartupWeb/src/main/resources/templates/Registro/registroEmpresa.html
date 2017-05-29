@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="es">
+<title>StartupWeb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="../../static/js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}">
+	
+</script>
+<script src="../../static/js/jquery.stellar.min.js"
+	th:src="@{/js/jquery.stellar.min.js}">
+	
+</script>
+<link href="../../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+<link href="../../static/css/registro.css"
+	th:href="@{/css/registro.css}" rel="stylesheet" media="screen" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/accesoEmpresa}" method="POST" th:object="${user}">
+				<fieldset>
+
+					<!-- Form Name -->
+					<h3>Introduce tus datos</h3>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="nombre">Nombre de la empresa</label>
+						<div class="col-md-4">
+							<input id="nombre" name="nombre" th:field="*{nombre}" type="text" placeholder="Nombre"
+								class="form-control input-md" />
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="cif">CIF</label>
+						<div class="col-md-4">
+							<input id="cif" name="cif" th:field="*{empresa.cif}" type="text" placeholder="CIF"
+								class="form-control input-md" />
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="direccion">Dirección</label>
+						<div class="col-md-4">
+							<input id="direccion" name="dieccion" th:field="*{empresa.direccion}" type="text" placeholder="Introduce tu direccion"
+								class="form-control input-md" />
+
+						</div>
+					</div>
+					
+					
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="email">Correo electrónico</label>
+						<div class="col-md-4">
+							<input id="email" name="email" type="email" th:field="*{email}"  placeholder="Correo electrónico"
+								class="form-control input-md" />
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="phone">Contraseña</label>
+						<div class="col-md-4">
+							<input id="password" name="password" type="password" th:field="*{password}" placeholder="Contraseña"
+								class="form-control input-md" />
+
+						</div>
+					</div>
+
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="reg"></label>
+						<div class="col-md-4">
+							<button id="reg" name="reg" class="btn btn-primary">Registrar empresa</button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>

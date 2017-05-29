@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="es">
+<title>StartupWeb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="../../static/js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}">
+	
+</script>
+<script src="../../static/js/jquery.stellar.min.js"
+	th:src="@{/js/jquery.stellar.min.js}">
+	
+</script>
+<link href="../../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+<link href="../../static/css/registro.css"
+	th:href="@{/css/registro.css}" rel="stylesheet" media="screen" />
+
+<link href="../../static/css/style.css" th:href="@{/css/style.css}"
+	rel="stylesheet" media="screen" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-1 col-md-2"></div>
+			<div class="col-12 col-md-8">
+				<h3>Escoge tipo de usuario</h3>
+				<div class="row">
+					<div class="col-6 col-md-6">
+						<a href="#" th:href="@{/formInversor}"><div id="boxInversor">Inversor</div></a>
+					</div>
+					<div class="col-6 col-md-6">
+						<a href="#" th:href="@{/formEmpresa}"><div id="boxEmpresa">Empresa</div></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-1 col-md-2"></div>
+		</div>
+	</div>
+</body>
+</html>

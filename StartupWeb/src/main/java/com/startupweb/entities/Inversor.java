@@ -21,6 +21,8 @@ public class Inversor {
 	private long id;
 	private String nombre;
 	private String apellido;
+	private String dni;
+	private String direccion;
 	private Long importe;
 	private Set<InversorProyecto> inversorProyectos = new HashSet<>();
 	private User user;
@@ -28,12 +30,14 @@ public class Inversor {
 	public Inversor() {
 	}
 
-	public Inversor(String nombre, String apellido, Long importe, User user) {
+	public Inversor(String nombre, String apellido, Long importe, User user, String dni, String direccion) {
 
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.importe = importe;
 		this.user = user;
+		this.dni = dni;
+		this.direccion = direccion;
 	}
 
     @Id
@@ -100,6 +104,22 @@ public class Inversor {
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 }

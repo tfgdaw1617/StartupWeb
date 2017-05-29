@@ -14,18 +14,18 @@ public class Empresa {
 	private long id;
 	private String nombre;
 	private String direccion;
-	private String CIF;
+	private String cif;
 	private User user;
 
 	public Empresa() {
 	}
 
-	public Empresa(String nombre, String direccion, User user, String CIF) {
+	public Empresa(String nombre, String direccion, User user, String cif) {
 
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.user = user;
-		this.CIF = CIF;
+		this.cif = cif;
 	}
 
     @Id
@@ -64,12 +64,12 @@ public class Empresa {
 		this.user = user;
 	}
 
-	public String getCIF() {
-		return CIF;
+	public String getCif() {
+		return cif;
 	}
 
-	public void setCIF(String cIF) {
-		CIF = cIF;
+	public void setCif(String cif) {
+		cif = cif;
 	}
 
 }

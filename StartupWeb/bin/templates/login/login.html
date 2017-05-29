@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="es">
 <title>StartupWeb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="../../static/js/jquery.min.js"
 	th:src="@{/js/jquery.min.js}">
@@ -15,37 +16,29 @@
 	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
 <link href="../../static/css/login.css" th:href="@{/css/login.css}"
 	rel="stylesheet" media="screen" />
+	<link href="../../static/css/style.css" th:href="@{/css/style.css}"
+	rel="stylesheet" media="screen" />
 </head>
 <body>
-	<div id="login">
-
-		<h1>
-			<strong>StartupWeb</strong>
-		</h1>
-
-		<form th:action="@{/access}" method="get">
-
-			<fieldset>
-
-				<p>
-					<input type="text" placeholder="Correo electrónico" required="required" />
-				</p>
-
-				<p>
-					<input type="password" placeholder="Contraseña" required="required" />
-				</p>
-
-				<p>
-					<a href="#" >¿Olvidaste la contraseña?</a>
-				</p>
-
-				<p>
-					<input type="submit" value="Accede" />
-				</p>
-				<p>
-					<a href="#" th:href="@{/registro}">¿No tienes cuenta? ¡Regístrate!</a>
-				</p>
-			</fieldset>
+	<div class="container">
+		<form th:action="@{/login}" method="POST" class="form-signin">
+			<img src="../static/images/logos/SW1.png" th:src="@{/images/logos/SW_Entero_Blue.png}" class="img-responsive" alt="Logo"  width='275px'/>
+			<br/>
+			 
+			<input type="text" id="email" name="email"  th:placeholder="Correo"
+				class="form-control" /> <br/> 
+			<input type="password"  th:placeholder="Contraseña"
+				id="pass" name="pass" class="form-control" /> <br /> 
+				
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email fail or Password invalid, please verify</p>
+				<p th:value="${param.error}"></p>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+			<br />
+			<a href="">¿Olvidaste la contraseña?</a>
+			<br />
+			<p>¿No tienes cuenta? <a href="#" th:href="@{/registro}">Regístrate</a></p>
 		</form>
 	</div>
 </body>

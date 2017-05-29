@@ -7,21 +7,33 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "USER")
 public class User {
 
 	private long id;
+	
 	private String nombre;
-	private String pass;
-	private Integer telefono;
+	
+	@Column(name = "password")
+	@Length(min = 5, message = "*Your passwordword must have at least 5 characters")
+	@NotEmpty(message = "*Please provide your passwordword")
+	private String password;
+	private String telefono;
+	@Column(name = "email")
+	@Email(message = "*Please provide a valid Email")
+	@NotEmpty(message = "*Please provide an email")
 	private String email;
 	private Set<Rol> roles;
 	private Inversor inversor;
@@ -29,16 +41,21 @@ public class User {
 	private Set<Conversacion> conversaciones;
 	private Set<Mensaje> mensajesFrom;
 	private Set<Mensaje> mensajesTo;
-	
-	
+	@Column(name = "active")
+	private int active;
 	public User() {
 		super();
 	}
-	
-	public User(String nombre, String pass, Integer telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo) {
+	public User(String email, String password, int active){
+		super();
+		this.email = email;
+		this.password = password;
+		this.active = active;
+	}
+	public User(String nombre, String password, String telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo, int active) {
 		super();
 		this.nombre = nombre;
-		this.pass = pass;
+		this.password = password;
 		this.telefono = telefono;
 		this.email = email;
 		this.roles = roles;
@@ -47,33 +64,36 @@ public class User {
 		this.conversaciones = conversaciones;
 		this.mensajesFrom = mensajesFrom;
 		this.setMensajesTo(mensajesTo);
+		this.active = active;
 	}
 	
 	@Id
     @GeneratedValue
-    @Column(name = "USER_ID")
+	@Column(name = "USER_ID")
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getPass() {
-		return pass;
+	
+	public String getPassword() {
+		return password;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	@Column(name = "email")
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
@@ -139,6 +159,14 @@ public class User {
 
 	public void setMensajesTo(Set<Mensaje> mensajesTo) {
 		this.mensajesTo = mensajesTo;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
 	}
 
 }

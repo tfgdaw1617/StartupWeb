@@ -1,6 +1,7 @@
 package com.startupweb.controllers;
 
 import com.startupweb.repository.InversorRepository;
+import com.startupweb.entities.FiltroBusqueda;
 import com.startupweb.entities.Inversor;
 import com.startupweb.entities.Proyecto;
 import com.startupweb.entities.InversorProyecto;
@@ -31,6 +32,12 @@ public class InversorController {
     @Autowired
     InversorProyectoRepository inversorProyectoRepository;
 
+    @RequestMapping(value="/busquedaEmpresas", method=RequestMethod.GET)
+    public String busquedaEmpresas(Model model) {
+    	model.addAttribute("filtro", new FiltroBusqueda());
+        return "Busqueda/busquedaEmpresas";
+    }
+    
     @RequestMapping(value="/inversor/{id}/addproyecto", method=RequestMethod.GET)
     public String viewInversor(@PathVariable Long id, Model model) {
         model.addAttribute("inversor", inversorRepository.findOne(id));
