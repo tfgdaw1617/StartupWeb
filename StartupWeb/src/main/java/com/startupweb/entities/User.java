@@ -26,7 +26,7 @@ public class User {
 	
 	private String nombre;
 	
-	@Column(name = "password")
+	@Column(name = "password") 
 	@Length(min = 5, message = "*Your passwordword must have at least 5 characters")
 	@NotEmpty(message = "*Please provide your passwordword")
 	private String password;
