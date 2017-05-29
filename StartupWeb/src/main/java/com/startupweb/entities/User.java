@@ -43,6 +43,8 @@ public class User {
 	private Set<Mensaje> mensajesTo;
 	@Column(name = "active")
 	private int active;
+	private byte[] imagen;
+	
 	public User() {
 		super();
 	}
@@ -52,7 +54,7 @@ public class User {
 		this.password = password;
 		this.active = active;
 	}
-	public User(String nombre, String password, String telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo, int active) {
+	public User(String nombre, String password, String telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo, int active, byte[] imagen) {
 		super();
 		this.nombre = nombre;
 		this.password = password;
@@ -65,6 +67,7 @@ public class User {
 		this.mensajesFrom = mensajesFrom;
 		this.setMensajesTo(mensajesTo);
 		this.active = active;
+		this.imagen = imagen;
 	}
 	
 	@Id
@@ -167,6 +170,12 @@ public class User {
 
 	public void setActive(int active) {
 		this.active = active;
+	}
+	public byte[] getImagen() {
+		return imagen;
+	}
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 
 }
