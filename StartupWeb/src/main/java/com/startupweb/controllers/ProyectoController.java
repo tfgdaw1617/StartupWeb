@@ -1,9 +1,13 @@
 package com.startupweb.controllers;
 
 import com.startupweb.entities.Proyecto;
+import com.startupweb.entities.User;
 import com.startupweb.repository.ProyectoRepository;
+import com.startupweb.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +23,8 @@ public class ProyectoController {
 
     @Autowired
     ProyectoRepository proyectoRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @RequestMapping(value="proyecto/{id}/edit", method=RequestMethod.GET)
     public String getEditProyecto(@PathVariable Long id, Model model){
@@ -26,6 +32,18 @@ public class ProyectoController {
             return "proyectoform";
     }
 
+    @RequestMapping(value="/proyecto/{id}", method=RequestMethod.GET)
+    public String showProyecto(@PathVariable Long id, Model model) {
+        Proyecto proyecto = proyectoRepository.findOne(id);
+        proyectoRepository.save(proyecto);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User user = userRepository.findByEmail(email);
+        model.addAttribute("proyecto", proyecto);
+        model.addAttribute("user", user);
+        return "Proyectos/ProyectoIndex";
+    }
+    
     @RequestMapping(value="proyecto/{id}/edit", method=RequestMethod.POST)
     public String postEditProyecto(@PathVariable Long id, Proyecto p, Model model) {
         Proyecto proyecto = proyectoRepository.findOne(id);
@@ -38,20 +56,24 @@ public class ProyectoController {
         return "redirect:/proyectos/";
     }
 
-    @RequestMapping(value="/proyectos", method=RequestMethod.GET)
+    @RequestMapping(value="/crearProyecto", method=RequestMethod.GET)
 	public String listProyectos(Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);
         model.addAttribute("proyecto", new Proyecto());
-        model.addAttribute("proyectos", proyectoRepository.findAll());
-        return "proyectos";
+        model.addAttribute("user", user);
+        return "Proyectos/crearProyecto";
 	}
 
-    @RequestMapping(value="/proyectos", method=RequestMethod.POST)
+    @RequestMapping(value="/crearProyecto", method=RequestMethod.POST)
 	public String addProyecto(Proyecto p, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);
+ 		if(user.getRol().getDescripcion().equals("EMPRESA")) p.setEmpresa(user.getEmpresa());	
         proyectoRepository.save(p);
-
-        model.addAttribute("proyecto", new Proyecto());
-        model.addAttribute("proyectos", proyectoRepository.findAll());
-        return "proyectos";
+        return "redirect:/access";
 	}
 
 }

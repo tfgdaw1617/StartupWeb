@@ -27,11 +27,11 @@
 			<div class="col-sm-9">
 				<div class="well">
 					<div class="container">
-						<form class="form-horizontal">
+						<form class="form-horizontal" method="POST" th:action="@{/guardaCambios}" th:object="${user}">
 							<fieldset>
 
 								<!-- Form Name -->
-								<legend>Configuración de usuario</legend>
+								<legend >Configuración de usuario</legend>
 
 								<!-- Text input-->
 								<div class="form-group">
@@ -39,7 +39,31 @@
 									<div class="col-md-6">
 										<input id="f_name" name="f_name" type="text"
 											placeholder="Nombre"
-											class="form-control input-md" required="" />
+											class="form-control input-md" required="" th:field="*{nombre}" th:value="${user.nombre}"/>
+									</div>
+								</div>
+								<div class="form-group" th:if="${user.rol.descripcion} == 'INVERSOR'">
+									<label class="col-md-4 control-label" for="f_name">Apellido</label>
+									<div class="col-md-6">
+										<input id="apellido" name="apellido" type="text"
+											placeholder="Apellido"
+											class="form-control input-md"  th:field="*{inversor.apellido}" required="" th:value="${user.inversor.apellido}"/>
+									</div>
+								</div>
+								<div class="form-group" th:if="${user.rol.descripcion} == 'INVERSOR'">
+									<label class="col-md-4 control-label" for="f_name">NIF</label>
+									<div class="col-md-6">
+										<input id="dni" name="dni" type="text"
+											placeholder="DNI"
+											class="form-control input-md" required="" th:field="*{inversor.dni}" th:value="${user.inversor.dni}"/>
+									</div>
+								</div>
+								<div class="form-group" th:if="${user.rol.descripcion} == 'EMPRESA'">
+									<label class="col-md-4 control-label" for="f_name">CIF</label>
+									<div class="col-md-6">
+										<input id="cif" name="cif" type="text"
+											placeholder="CIF"
+											class="form-control input-md" th:field="*{empresa.cif}" required="" th:value="${user.empresa.cif}"/>
 									</div>
 								</div>
 								<!-- Prepended text-->
@@ -47,9 +71,9 @@
 									<label class="col-md-4 control-label" for="f_income">Correo electrónico</label>
 									<div class="col-md-6">
 										<div class="input-group">
-											<span class="input-group-addon">Rs.</span> <input
+											<span class="input-group-addon">@</span> <input
 												id="f_income" name="f_income" class="form-control"
-												placeholder="Correo electrónico" type="email" required="" />
+												placeholder="Correo electrónico" type="email" th:field="*{email}" required="" th:value="${user.email}"/>
 										</div>
 										<p class="help-block">Introduce un correo electrónico válido</p>
 									</div>
@@ -61,32 +85,11 @@
 									<div class="col-md-6">
 										<input id="m_name" name="m_name" type="text"
 											placeholder="Teléfono" class="form-control input-md"
-											required="" /> <span class="help-block"></span>
+											required="" th:value="${user.telefono}" th:field="*{telefono}" /> <span class="help-block"></span>
 									</div>
 								</div>
 
-								<!-- Prepended text-->
-								<div class="form-group">
-									<label class="col-md-4 control-label" for="m_income">Edad</label>
-									<div class="col-md-6">
-										<div class="input-group">
-											<span class="input-group-addon">Años</span> <input
-												id="m_income" name="m_income" class="form-control"
-												placeholder="Introduce tu edad" type="text" required="" />
-										</div>
-									</div>
-								</div>
 
-								<!-- Select Basic -->
-								<div class="form-group">
-									<label class="col-md-4 control-label" for="gender">Tipo de usuario</label>
-									<div class="col-md-6">
-										<select id="gender" name="gender" class="form-control">
-											<option value="MALE">Inversor</option>
-											<option value="FEMALE">Empresa</option>
-										</select>
-									</div>
-								</div>
 
 								<!-- Text input-->
 								<div class="form-group">
@@ -94,29 +97,19 @@
 									<div class="col-md-6">
 										<input id="dob" name="dob" type="text"
 											placeholder="Dirección" class="form-control input-md"
-											required="" /> <span class="help-block">Please choose
+											required="" th:field="*{direccion}" th:value="${user.direccion}"/> <span class="help-block">Please choose
 											your from the calender </span>
 									</div>
 								</div>
 
-								<!-- Select Basic -->
-								<div class="form-group">
-									<label class="col-md-4 control-label" for="pwd">Perfil público</label>
-									<div class="col-md-6">
-										<select id="pwd" name="pwd" class="form-control">
-											<option value="NO">No</option>
-											<option value="YES">Sí</option>
-										</select>
-									</div>
-								</div>
 
 								<!-- Text input-->
-								<div class="form-group">
+								<div class="form-group" th:if="${user.rol.descripcion} == 'INVERSOR'">
 									<label class="col-md-4 control-label" for="ph_cat">Cantidad a invertir</label>
 									<div class="col-md-6">
-										<input id="ph_cat" name="ph_cat" type="text"
+										<input id="ph_cat" name="ph_cat" type="number"
 											placeholder="Cantidad a invertir"
-											class="form-control input-md" required="" />
+											class="form-control input-md" th:field="*{inversor.importe}" required="" th:value="${user.inversor.importe}"/>
 									</div>
 								</div>
 
@@ -127,11 +120,9 @@
 									<label class="col-md-4 control-label"></label>
 
 									<div class="col-md-8">
-										<input type="reset" class="btn btn-primary btn-lg " id="reset"
-											name="reset" value="Restaurar" />  <input
+										<input
 											type="submit" class="btn btn-success btn-lg " id="submit"
-											name="submitb" value="Guardar"
-											onclick="return confirm('Are you sure you want to commit ?')" />
+											name="submitb" value="Guardar" />
 
 									</div>
 								</div>

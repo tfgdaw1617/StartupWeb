@@ -1,0 +1,27 @@
+.well h2 {
+    position: relative;
+    top: 0px;
+    width: 100%;
+    background: #25b0e1;
+    right: 0px;
+    color: white;
+    margin: 0px;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 7px;
+    margin-bottom: 15px;
+}
+#infoProyecto{
+	display: table;
+	width: 100%;
+}
+div#alertInversion {
+    z-index: 1;
+    height: 250px;
+    width: 250px;
+    background: red;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+}

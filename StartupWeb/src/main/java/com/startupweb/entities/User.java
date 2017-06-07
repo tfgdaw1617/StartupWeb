@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -35,7 +36,7 @@ public class User {
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
 	private String email;
-	private Set<Rol> roles;
+	private Rol rol;
 	private Inversor inversor;
 	private Empresa empresa;
 	private Set<Conversacion> conversaciones;
@@ -44,6 +45,8 @@ public class User {
 	@Column(name = "active")
 	private int active;
 	private byte[] imagen;
+	private String direccion;
+	private Long visitas;
 	
 	public User() {
 		super();
@@ -54,13 +57,13 @@ public class User {
 		this.password = password;
 		this.active = active;
 	}
-	public User(String nombre, String password, String telefono, String email, Set<Rol> roles, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo, int active, byte[] imagen) {
+	public User(String nombre, String password, String telefono, String email, Rol rol, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo, int active, byte[] imagen, String direccion, Long visitas) {
 		super();
 		this.nombre = nombre;
 		this.password = password;
 		this.telefono = telefono;
 		this.email = email;
-		this.roles = roles;
+		this.rol = rol;
 		this.inversor = inversor;
 		this.empresa = empresa;
 		this.conversaciones = conversaciones;
@@ -68,6 +71,8 @@ public class User {
 		this.setMensajesTo(mensajesTo);
 		this.active = active;
 		this.imagen = imagen;
+		this.setDireccion(direccion);
+		this.visitas = visitas;
 	}
 	
 	@Id
@@ -107,14 +112,14 @@ public class User {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "ROL_ID"))
-	public Set<Rol> getRoles() {
-		return roles;
+	@ManyToOne
+    @JoinColumn(name = "ROL_ID")
+	public Rol getRol() {
+		return rol;
 	}
 
-	public void setRoles(Set<Rol> roles) {
-		this.roles = roles;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "INVERSOR_ID")
@@ -176,6 +181,18 @@ public class User {
 	}
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public Long getVisitas() {
+		return visitas;
+	}
+	public void setVisitas(Long visitas) {
+		this.visitas = visitas;
 	}
 
 }

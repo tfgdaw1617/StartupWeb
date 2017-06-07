@@ -18,45 +18,45 @@
           <div class="col-lg-8 col-md-7 col-sm-6">
             <h1>Modificar Inversor</h1>
             <div>
-                <form th:object="${inversor}" th:action="@{/inversor/{id}/edit(id=${inversor.id})}" method="post"  class="form-horizontal"
+                <form th:object="${inversor}" th:action="@{/inversor}" method="post"  class="form-horizontal"
                 enctype="multipart/form-data">
                     <fieldset>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Nombre</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="nombre"
-                                th:value="${inversor.nombre}"/>
+                                th:value="${user.nombre}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Apellido</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="apellido"
-                                th:value="${inversor.apellido}" />
+                                th:value="${user.inversor.apellido}" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Email</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="email"
-                                th:value="${inversor.email}" />
+                                th:value="${user.email}" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Importe</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="importe"
-                                th:value="${inversor.importe}" />
+                                th:value="${user.inversor.importe}" />
                         </div>
                     </div>
             		<div class="form-group">
 	                    <label class="col-lg-3 control-label">Proyectos</label>
 	                    <div class="col-lg-9">
-                            <div th:each="ip : ${inversor.inversorProyectos}">
-                                <span th:text="${ip.fechaRegistro}" /> -
+                            <div th:each="ip : ${user.inversor.inversorProyectos}">
+                                <!--  <span th:text="${ip.fechaRegistro}" /> -
                                 <span th:text="${ip.proyecto.titulo}" /> -
                                 <span th:text="${ip.proyecto.descripcion}" /> -
-                                <span th:text="${ip.importe}" />
+                                <span th:text="${ip.importe}" />-->
                             </div>
 	                    </div>
 	                </div>

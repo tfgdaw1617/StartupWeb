@@ -98,16 +98,14 @@
 						</div>
 						<div class="row">
 
-							<div class="col-xs-18 col-sm-6 col-md-4">
+							<div class="col-xs-18 col-sm-6 col-md-4" th:each="proyecto : ${proyectos}">
 								<div class="thumbnail">
 									<img src="http://placehold.it/500x300" alt="" />
 									<div class="caption">
-										<h4>Nombre Empresa</h4>
-										<p>Título del proyecto</p>
-										<p>Sector de la empresa</p>
-										<p>Importe</p>
+										<h4>Nombre: <span th:text="${proyecto.titulo}"></span></h4>
+										<p>Importe: <span th:text="${proyecto.importe}"></span> €</p>
 										<p>
-											<a href="#" class="btn btn-info btn-xs" role="button">Ver
+											<a th:href="@{'/proyecto/' + ${proyecto.id}}" class="btn btn-info btn-xs" role="button">Ver
 												proyecto</a>
 										</p>
 									</div>

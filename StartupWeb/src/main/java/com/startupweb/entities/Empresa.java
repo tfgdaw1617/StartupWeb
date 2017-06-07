@@ -1,9 +1,13 @@
 package com.startupweb.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -12,20 +16,20 @@ import javax.persistence.Table;
 public class Empresa {
 
 	private long id;
-	private String nombre;
-	private String direccion;
 	private String cif;
 	private User user;
-
+	private Set<Proyecto> proyectos;
+	private Set<Toque> toques;
+	
 	public Empresa() {
 	}
 
-	public Empresa(String nombre, String direccion, User user, String cif) {
+	public Empresa(String nombre, User user, String cif, Set<Proyecto> proyectos, Set<Toque> toques) {
 
-		this.nombre = nombre;
-		this.direccion = direccion;
 		this.user = user;
 		this.cif = cif;
+		this.proyectos = proyectos;
+		this.toques = toques;
 	}
 
     @Id
@@ -39,22 +43,7 @@ public class Empresa {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	
 	@OneToOne(mappedBy = "empresa")
 	public User getUser() {
 		return user;
@@ -69,7 +58,24 @@ public class Empresa {
 	}
 
 	public void setCif(String cif) {
-		cif = cif;
+		this.cif = cif;
+	}
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	public Set<Proyecto> getProyectos() {
+		return proyectos;
+	}
+
+	public void setProyectos(Set<Proyecto> proyectos) {
+		this.proyectos = proyectos;
+	}
+
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	public Set<Toque> getToques() {
+		return toques;
+	}
+
+	public void setToques(Set<Toque> toques) {
+		this.toques = toques;
 	}
 
 }

@@ -30,30 +30,24 @@
 					<h2>Información específica</h2>
 					<div class="row" id="infoEmpresa">
 						<div class="col-sm-4">
-							<a href="#editarImagen" data-toggle="modal" ><div id="popupEditaImagen">Cambiar imagen <i class="fa fa-hand-pointer-o" aria-hidden="true"></i></div></a>
 							<img src="../static/images/logos/SW_Entero_Blue.png" th:src="@{/images/profile/default.png}" width="25px"
 								id="imgPerfil" class="img-responsive"
 								alt="Logo empresa" />
 
 						</div>
 						<div class="col-sm-4" style="text-align: left">
-							<h4 th:text="${user.nombre}"></h4>
+							<h4 th:text="${empresa.nombre}"></h4>
 							<p>
-								Dirección: <span th:text="${user.direccion}"></span>
+								Dirección: <span th:text="${empresa.direccion}"></span>
 							</p>
 							<p>
-								Teléfono: <span th:text="${user.telefono}"></span>
+								Teléfono: <span th:text="${empresa.telefono}"></span>
 							</p>
-							<p th:if="${user.rol.descripcion} == 'EMPRESA'">CIF: <span th:text="${user.empresa.cif}"></span></p>
-							<p th:if="${user.rol.descripcion} == 'INVERSOR'">NIF: <span th:text="${user.inversor.dni}"></span></p>
-							<p th:if="${user.rol.descripcion} == 'EMPRESA'">Proyectos activos: <span th:text="${#lists.size(proyectos)}"></span></p>
-							<p th:if="${user.rol.descripcion} == 'INVERSOR'">Proyectos invertidos: <span th:text="${#lists.size(proyectos)}"></span></p>
+							<p>CIF: <span th:text="${empresa.empresa.cif}"></span></p>
+							<p>Proyectos Activos: 3</p>
 						</div>
 						<div class="col-sm-4" style="text-align: left">
-							<p>País: España</p>
-							<p>Población: Barcelona</p>
-							<p>Año fundación: 2017</p>
-							<p></p>
+							<a type="button" th:href="@{'/empresa/' + ${empresa.id}}" class="btn btn-info btn-lg" >Abrir conversación</a>
 						</div>
 					</div>
 				</div>
@@ -83,41 +77,15 @@
 							<h2>Mensajes pendientes</h2>
 						</div>
 					</div>
-					<div class="col-sm-4" th:if="${user.rol.descripcion} == 'INVERSOR'">
+					<div class="col-sm-4">
 						<div class="well">
-							<h2>Toques<span style="float:right">Ver todos</span></h2>
-							<h1 th:text="${#lists.size(user.inversor.toques)}" style="text-align:center"></h1>
+							<h2>Últimas noticias</h2>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div id="editarImagen" class="modal fade">
-		<form class="form-horizontal" method="POST"
-			enctype="multipart/form-data" th:action="@{/CambiarImagen}">
-			<div id="popupTitle">Editar imagen de perfil <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="cerrarPopup">×</button></div>
-			<img src="../static/images/logos/SW_Entero_Blue.png" width="25px"
-				th:src="@{/images/profile/default.png}" class="img-responsive" alt="Logo empresa" style="margin: 0 auto"/>
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-12 control-label" for="phone" style="text-align:center; margin-bottom: 10px;">Imagen
-					personal</label>
-				<div class="col-md-12">
-					<input id="imagen" name="imagen" type="file"
-						class="form-control input-md" style="border: none" />
-
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-1 control-label" for="reg"></label>
-				<div class="col-md-10">
-					<button id="reg" name="reg" class="btn btn-primary">Registrar
-						empresa</button>
-				</div>
-			</div>
-		</form>
 	</div>
 </body>
 </html>

@@ -9,8 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "PROYECTO")
@@ -18,17 +21,22 @@ public class Proyecto {
 
 	private long id;
     private String titulo;
+    @Column(length = 100000000)
     private String descripcion;
 	private Long importe;
+	private Long importInicial;
 	private Set<InversorProyecto> proyectoInversores = new HashSet<>();
+	private Empresa empresa;
 
     public Proyecto() {
     }
 
-    public Proyecto(String titulo, String descripcion, Long importe) {
+    public Proyecto(String titulo, String descripcion, Long importe, Empresa empresa, Long importeInicial) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.importe = importe;
+		this.empresa = empresa;
+		this.importInicial = importeInicial;
 	}
 
     @Id
@@ -78,4 +86,22 @@ public class Proyecto {
     public void addProyectoInversor(InversorProyecto proyectoInversor) {
         this.proyectoInversores.add(proyectoInversor);
     }
+    
+    @ManyToOne
+    @JoinColumn(name = "EMPRESA_ID")
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public Long getImportInicial() {
+		return importInicial;
+	}
+
+	public void setImportInicial(Long importInicial) {
+		this.importInicial = importInicial;
+	}
 }

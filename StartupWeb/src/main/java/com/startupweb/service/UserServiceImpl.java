@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
 	public void saveEmpresa(User user) {
 		Rol userRole = rolRepository.findByDescripcion("EMPRESA");
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<Rol>(Arrays.asList(userRole)));
+        user.setRol(userRole);
         user.setActive(1);
 		userRepository.save(user);
 		
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
 	public void saveInversor(User user) {
 		Rol userRole = rolRepository.findByDescripcion("INVERSOR");
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<Rol>(Arrays.asList(userRole)));
+		user.setRol(userRole);
         user.setActive(1);
 		userRepository.save(user);
 		

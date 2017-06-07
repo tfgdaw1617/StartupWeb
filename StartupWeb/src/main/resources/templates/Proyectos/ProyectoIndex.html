@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+<title>StartupWeb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+<link href="../static/css/navbar.css" th:href="@{/css/navbar.css}"
+	rel="stylesheet" media="screen" />
+<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
+<script type="text/javascript"
+	src="/assets/script/jquery.canvasjs.min.js"></script>
+<link href="../../static/css/proyectoIndex.css"
+	th:href="@{/css/proyectoIndex.css}" rel="stylesheet" media="screen" />
+<script src="../static/js/proyectoIndex.js"
+	th:src="@{/js/proyectoIndex.js}"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+</head>
+<body>
+	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-3 sidenav hidden-xs">
+				<!--/*/ <th:block th:include="fragments/headerLeft :: headerLeft"></th:block> /*/-->
+			</div>
+			<div class="col-sm-9">
+				<div class="well">
+					<h2>Información del proyecto</h2>
+					<div class="row" id="infoProyecto">
+						<div class="col-sm-4">
+							<img src="../static/images/logos/SW_Entero_Blue.png"
+								th:src="@{/images/profile/default.png}" width="25px"
+								id="imgPerfil" class="img-responsive" alt="Logo empresa" />
+						</div>
+						<div class="col-sm-4">
+							<h3 th:text="${proyecto.titulo}"></h3>
+							<h5 th:text="${proyecto.empresa.user.nombre}"></h5>
+							<h3 th:text="${proyecto.importe}"></h3>
+						</div>
+						<div class="col-sm-4">
+									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+									data-target="#myModal">Invertir</button><br /><br />
+									<a type="button" th:href="@{'/empresa/' + ${proyecto.empresa.user.id}}" class="btn btn-info btn-lg" >Ver empresa</a>
+						</div>
+					</div>
+
+				</div>
+				<div class="well">
+					<h2>Información específica</h2>
+					<div style="padding: 25px">
+						<p th:text="${proyecto.descripcion}"></p>
+					</div>					
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Datos de la inversión</h4>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{'/addproyecto/' + ${proyecto.id}}" method="POST">
+						<div class="form-group">
+							<label >Inversor: </label> <span
+								th:text="${user.nombre}"></span>
+						</div>
+						<div class="form-group">
+							<label >Proyecto:</label> <span
+								th:text="${proyecto.titulo}"></span>
+						</div>
+						<div class="form-group">
+							<label for="importe">Importe:</label> <input type="number" name="importe"
+								class="form-control" id="importe" />
+						</div>
+						<button type="submit" class="btn btn-default">Realizar la inversión</button>
+					</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

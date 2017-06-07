@@ -4,11 +4,17 @@ import com.startupweb.repository.InversorRepository;
 import com.startupweb.entities.FiltroBusqueda;
 import com.startupweb.entities.Inversor;
 import com.startupweb.entities.Proyecto;
+import com.startupweb.entities.Toque;
+import com.startupweb.entities.User;
 import com.startupweb.entities.InversorProyecto;
 import com.startupweb.repository.ProyectoRepository;
+import com.startupweb.repository.ToqueRepository;
+import com.startupweb.repository.UserRepository;
 import com.startupweb.repository.InversorProyectoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -27,13 +34,54 @@ public class InversorController {
     private InversorRepository inversorRepository;
 
     @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
     ProyectoRepository proyectoRepository;
 
     @Autowired
     InversorProyectoRepository inversorProyectoRepository;
+    @Autowired
+    ToqueRepository toqueRepository;
 
+    @RequestMapping(value="/toque/{id}", method=RequestMethod.GET)
+    public String publicInversor(@PathVariable Long id, Model model) {
+    	User userInversor = userRepository.findOne(id);
+    	Toque toque = new Toque();
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);	
+    	toque.setEmpresa(user.getEmpresa());
+    	toque.setInversor(userInversor.getInversor());
+    	toqueRepository.save(toque);
+    	return "redirect:/access";
+    }
+    
+    @RequestMapping(value="/inversor/{id}", method=RequestMethod.GET)
+    public String darToque(@PathVariable Long id, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);		
+ 		User inversor = userRepository.findOne(id);
+ 		List<Proyecto> proyectos = new ArrayList<>();
+ 		for(InversorProyecto ip : inversor.getInversor().getInversorProyectos()){
+ 			proyectos.add(ip.getProyecto());
+ 		}
+ 		model.addAttribute("proyectos", proyectos);
+    	model.addAttribute("inversor", inversor);
+    	model.addAttribute("filtro", new FiltroBusqueda());
+    	model.addAttribute("user", user);
+        return "User/publicInversor";
+    }
+    
     @RequestMapping(value="/busquedaEmpresas", method=RequestMethod.GET)
     public String busquedaEmpresas(Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);
+    	List<Proyecto> proyectos = (List<Proyecto>) proyectoRepository.findAll();
+    	model.addAttribute("user", user);
+    	model.addAttribute("proyectos", proyectos);
     	model.addAttribute("filtro", new FiltroBusqueda());
         return "Busqueda/busquedaEmpresas";
     }
@@ -45,53 +93,43 @@ public class InversorController {
         return "inversor";
     }
 
-    @RequestMapping(value="/inversor/{id}/addproyecto", method=RequestMethod.POST)
-    public String inversorAddProyecto(@PathVariable Long id, @RequestParam Long proyecto_id, Model model) {
-        Proyecto proyecto = proyectoRepository.findOne(proyecto_id);
-        Inversor inversor = inversorRepository.findOne(id);
-
-        if (inversor != null && proyecto != null 
-            && !inversor.poseeProyecto(proyecto) 
-            && proyecto.getImporte() > 0
-            && inversor.getImporte() > 0) {
+    @RequestMapping(value="/addproyecto/{id}", method=RequestMethod.POST)
+    public String inversorAddProyecto(@RequestParam("importe") Long importe, @PathVariable Long id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);
+    	Proyecto proyecto = proyectoRepository.findOne(id);
+        
 
           InversorProyecto inversorProyecto = new InversorProyecto();
-          inversorProyecto.setInversor(inversor);
+          inversorProyecto.setInversor(user.getInversor());
           inversorProyecto.setProyecto(proyecto);
 
-          if (proyecto.getImporte() > inversor.getImporte()) {
-            inversorProyecto.setImporte(inversor.getImporte());;
-            proyecto.setImporte(proyecto.getImporte() - inversor.getImporte());
-            inversor.setImporte(0L);
+          if (proyecto.getImporte() > importe) {
+            inversorProyecto.setImporte(importe);;
+            proyecto.setImporte(proyecto.getImporte() - importe);
+            user.getInversor().setImporte(user.getInversor().getImporte()-importe);
           } else {
             inversorProyecto.setImporte(proyecto.getImporte());
-            inversor.setImporte(inversor.getImporte() - proyecto.getImporte());
+            user.getInversor().setImporte(user.getInversor().getImporte() - proyecto.getImporte());
             proyecto.setImporte(0L);
           }
           inversorProyectoRepository.save(inversorProyecto);
-
-          inversorRepository.save(inversor);
+          userRepository.save(user);
           proyectoRepository.save(proyecto);    
-
-          model.addAttribute("inversor", inversorRepository.findOne(id));
-          model.addAttribute("proyectos", proyectoRepository.findAll());
-          return "redirect:/inversor/" + inversor.getId() + "/addproyecto";
-        }
-
         model.addAttribute("inversores", inversorRepository.findAll());
-        return "redirect:/inversores";
+        return "redirect:/access";
     }
 
-    @RequestMapping(value="inversor/{id}/edit", method=RequestMethod.GET)
-    public String getEditInversor(@PathVariable Long id, Model model){
-        model.addAttribute("inversor", inversorRepository.findOne(id));
+    @RequestMapping(value="/inversor", method=RequestMethod.GET)
+    public String getEditInversor(Model model){
+        model.addAttribute("user", userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         return "inversorform";
     }
 
     @RequestMapping(value="inversor/{id}/edit", method=RequestMethod.POST)
     public String postEditInversor(@PathVariable Long id, Inversor i){
         Inversor inversor = inversorRepository.findOne(id);
-        inversor.setNombre(i.getNombre());
         inversor.setApellido(i.getApellido());
         inversor.setImporte(i.getImporte());
         inversorRepository.save(inversor);

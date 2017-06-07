@@ -19,25 +19,23 @@ import javax.persistence.Table;
 public class Inversor {
 
 	private long id;
-	private String nombre;
 	private String apellido;
 	private String dni;
-	private String direccion;
 	private Long importe;
 	private Set<InversorProyecto> inversorProyectos = new HashSet<>();
 	private User user;
+	private Set<Toque> toques;
 
 	public Inversor() {
 	}
 
-	public Inversor(String nombre, String apellido, Long importe, User user, String dni, String direccion) {
+	public Inversor(String apellido, Long importe, User user, String dni, Set<Toque> toques) {
 
-		this.nombre = nombre;
 		this.apellido = apellido;
 		this.importe = importe;
 		this.user = user;
 		this.dni = dni;
-		this.direccion = direccion;
+		this.toques = toques;
 	}
 
     @Id
@@ -49,14 +47,6 @@ public class Inversor {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getApellido() {
@@ -113,13 +103,14 @@ public class Inversor {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-
-	public String getDireccion() {
-		return direccion;
+	
+	@OneToMany(mappedBy = "inversor", cascade = CascadeType.ALL)
+	public Set<Toque> getToques() {
+		return toques;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setToques(Set<Toque> toques) {
+		this.toques = toques;
 	}
 
 }

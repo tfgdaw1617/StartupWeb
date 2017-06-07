@@ -15,8 +15,8 @@ div#infoEmpresa{
 	padding: 10px 20px 20px 20px;
 }
 div#infoEmpresa img{
-	width: 250px;
-	margin: 0px;
+	width: 175px;
+	margin: 0 auto;
 }
 div#visitas {
     font-size: 2em;
@@ -94,4 +94,54 @@ div#visitas {
 	line-height:35px;
 	color:#444;
 	color:rgba(0, 0, 0, 0.4);
+}
+#editarImagen {
+    top: 0;
+    position: fixed;
+    width: 325px;
+    height: 450px;
+    background: white;
+    left: 0;
+    top: 0;
+    right: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 5px;
+}
+#popupTitle {
+    background: #219eca;
+    width: 100%;
+    font-size: 1.5em;
+    text-align: center;
+    color: white;
+    padding: 15px 5px 15px 5px;
+    margin: 0px 0px 10px 0px;
+}
+#cerrarPopup{
+	font-size: 1.2em;
+    color: white;
+    /* background-color: white; */
+    opacity: 1;
+    padding-right: 8px;
+}
+#popupEditaImagen{
+	background-color: #f7f7f7;
+    text-align: center;
+    top: -40px;
+    position: absolute;
+    width: 200px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    padding: 15px 5px 15px 5px;
+    border-radius: 5px;
+    display: none;
+    cursor: pointer
+}
+#popupEditaImagen a{
+	text-decoration:none;
 }

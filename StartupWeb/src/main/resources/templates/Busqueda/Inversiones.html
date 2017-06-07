@@ -31,7 +31,7 @@
 				<div class="well">
 					<div class="container" id="tourpackages-carousel">
 						<div id="busquedaTitle">
-							<h3>Búsqueda de nuevos inversores</h3>
+							<h3>Búsqueda de nuevos proyectos</h3>
 							<div id="filtro">
 								Filtrar resultado <i class="fa fa-plus" aria-hidden="true"
 									style="float: right; margin-right: 15px;"></i>
@@ -98,15 +98,16 @@
 						</div>
 						<div class="row">
 
-							<div class="col-xs-18 col-sm-6 col-md-4" th:each="inversor : ${inversores}">
+							<div class="col-xs-18 col-sm-6 col-md-4" th:each="inversorProyecto : ${ips}">
 								<div class="thumbnail">
 									<img src="http://placehold.it/500x300" alt="" />
 									<div class="caption">
-										<h4 th:text="${inversor.user.nombre}"></h4>
-										<p th:text="${inversor.importe}"></p>
+										<h4>Nombre: <span th:text="${inversorProyecto.id.proyecto.titulo}"></span></h4>
+										<p>Importe realizado:<span th:text="${inversorProyecto.importe}"> €</span> </p>
+										<p>Fecha: <span th:text="${inversorProyecto.fechaRegistro}"></span></p>
 										<p>
-											<a th:href="@{'/inversor/' + ${inversor.user.id}}" class="btn btn-info btn-xs" role="button">Ver
-												inversor</a>
+											<a th:href="@{'/proyecto/' + ${inversorProyecto.id.proyecto.id}}" class="btn btn-info btn-xs" role="button">Ver
+												proyecto</a>
 										</p>
 									</div>
 								</div>

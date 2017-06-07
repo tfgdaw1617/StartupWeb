@@ -18,4 +18,15 @@ $(function(){
 		},2000);
 	});
 	
+	$("#imgPerfil").on("mouseenter", function() {
+	      $("#popupEditaImagen").show();
+	}).on("mouseleave", function() {
+	      $("#popupEditaImagen").hide();
+	});
+	$("#popupEditaImagen").on("mouseenter", function() {
+	      $("#popupEditaImagen").show();
+	}).on("mouseleave", function() {
+	      $("#popupEditaImagen").hide();
+	});
+	
 });

@@ -1,5 +1,7 @@
 package com.startupweb.controllers;
 
+import java.io.File;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.startupweb.entities.User;
 import com.startupweb.service.UserService;
@@ -46,6 +50,7 @@ public class RegistroController {
 	}
 	
 	@RequestMapping(value="/accesoInversor", method=RequestMethod.POST)
+	
 	public String registrarInversor(@Valid User user, BindingResult bindingResult,Model model){
 		userService.saveInversor(user);
 		model.addAttribute("user", new User());
