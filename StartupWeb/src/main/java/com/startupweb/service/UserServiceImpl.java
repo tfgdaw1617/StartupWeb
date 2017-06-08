@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService{
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRol(userRole);
         user.setActive(1);
+        user.setVisitas(0L);
 		userRepository.save(user);
 		
 	}
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService{
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setRol(userRole);
         user.setActive(1);
+        user.setVisitas(0L);
 		userRepository.save(user);
 		
 	}

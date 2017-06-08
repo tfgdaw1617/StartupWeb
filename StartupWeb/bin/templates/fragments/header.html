@@ -47,13 +47,19 @@
 						class="img-responsive" alt="Logo" />
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="menuItem"><a href="#section1"><i
+					<ul class="nav nav-pills nav-stacked">
+						<li class="menuItem" th:if="${user.rol.descripcion} == 'INVERSOR'"><a
+							href="#section1" th:href="@{/inversiones}"><i
 								class="fa fa-line-chart" aria-hidden="true"></i> Inversiones</a></li>
-						<li class="menuItem"><a href="#section2"><i
-								class="fa fa-users" aria-hidden="true"></i> Mi red</a></li>
-						<li class="menuItem"><a href="#"
-							th:href="@{/busquedaEmpresas}"><i class="fa fa-search"
+						<li class="menuItem" th:if="${user.rol.descripcion} == 'EMPRESA'"><a
+							href="#section1" th:href="@{/crearProyecto}"><i
+								class="fa fa-line-chart" aria-hidden="true"></i> Crear proyecto</a></li>
+						<li class="menuItem"><a
+							th:if="${user.rol.descripcion} == 'INVERSOR'" href="#"
+							th:href="@{/busquedaEmpresas}"> <i class="fa fa-search"
+								aria-hidden="true"></i> Búsqueda
+						</a> <a th:if="${user.rol.descripcion} == 'EMPRESA'" href="#"
+							th:href="@{/busquedaInversores}"><i class="fa fa-search"
 								aria-hidden="true"></i> Busqueda</a></li>
 						<li class="menuItem"><a href="#" th:href="@{/ContactosChat}"><i
 								class="fa fa-paper-plane-o" aria-hidden="true"></i>

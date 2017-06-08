@@ -14,6 +14,9 @@
 <script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
 <script type="text/javascript"
 	src="/assets/script/jquery.canvasjs.min.js"></script>
+	<link href="../../static/css/userIndex.css"
+	th:href="@{/css/userIndex.css}" rel="stylesheet" media="screen" />
+<script src="../static/js/userIndex.js" th:src="@{/js/userIndex.js}"></script>
 <link href="../../static/css/proyectoIndex.css"
 	th:href="@{/css/proyectoIndex.css}" rel="stylesheet" media="screen" />
 <script src="../static/js/proyectoIndex.js"
@@ -56,6 +59,18 @@
 					<div style="padding: 25px">
 						<p th:text="${proyecto.descripcion}"></p>
 					</div>					
+				</div>
+				<div class="well">
+					<h2>Porcentaje realizado</h2>
+					<div class="proyectoBar">
+						<div class="skillbar clearfix " th:with="porcentaje=${proyecto.importe}+'%'" th:attr="data-percent=${porcentaje}" >
+							<div class="skillbar-title" style="background: #25b0e1;">
+								<span th:text="${proyecto.titulo}"></span>
+							</div>
+							<div class="skillbar-bar" style="background: #25b0e1;"></div>
+							<div class="skill-bar-percent" th:with="porcentaje=${proyecto.importe}+'%'" th:text="${porcentaje}"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

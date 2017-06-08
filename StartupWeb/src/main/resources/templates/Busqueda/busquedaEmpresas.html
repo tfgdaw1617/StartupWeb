@@ -37,45 +37,23 @@
 									style="float: right; margin-right: 15px;"></i>
 							</div>
 							<div id="filtroForm">
-								<form class="form-horizontal" method="POST"
+								<form class="form-horizontal" method="POST" th:action="@{/busquedaEmpresas}"
 									th:object="${filtro}">
 									<fieldset>
 										<div class="row" style="padding: 10px;">
+
 											<div class="form-group">
-												<label class="col-md-2 control-label" for="phone">Nombre</label>
-												<div class="col-md-8">
-													<input id="nombre" name="nombre" type="text"
+												<label class="col-md-2 control-label" for="nombre">Nombre</label>
+												<div class="col-md-4">
+													<input id="nombre" name="nombre" type="String"
 														th:field="*{nombre}" placeholder="Nombre"
 														class="form-control input-md" />
 
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-md-2 control-label" for="phone">Cantidad</label>
+												<label class="col-md-1 control-label" for="cantidad">Cantidad</label>
 												<div class="col-md-3">
 													<input id="cantidad" name="cantidad" type="number"
 														th:field="*{cantidad}" placeholder="Cantidad"
-														class="form-control input-md" />
-
-												</div>
-												<label class="col-md-1 control-label" for="phone">Sector</label>
-												<div class="col-md-4">
-													<input id="sector" name="sector" type="String"
-														th:field="*{sector}" placeholder="Sector"
-														class="form-control input-md" />
-
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-md-2 control-label" for="phone">Fecha</label>
-												<div class="col-md-4">
-													<input id="desde" name="desde" type="Date"
-														th:field="*{fechaDesde}" class="form-control input-md" />
-
-												</div>
-												<div class="col-md-4">
-													<input id="hasta" name="hasta" type="Date"
-														th:field="*{fechaHasta}" placeholder=""
 														class="form-control input-md" />
 
 												</div>

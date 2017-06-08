@@ -47,7 +47,7 @@
 							<p>Proyectos Activos: 3</p>
 						</div>
 						<div class="col-sm-4" style="text-align: left">
-							<a type="button" th:href="@{'/empresa/' + ${empresa.id}}" class="btn btn-info btn-lg" >Abrir conversación</a>
+							<a type="button" th:href="@{/Mensajes}" class="btn btn-info btn-lg" >Abrir conversación</a>
 						</div>
 					</div>
 				</div>
@@ -56,31 +56,49 @@
 					<div class="proyectoBar" th:each="proyecto : ${proyectos}">
 						<div class="skillbar clearfix " th:with="porcentaje=${proyecto.importe}+'%'" th:attr="data-percent=${porcentaje}" >
 							<div class="skillbar-title" style="background: #25b0e1;">
-								<span th:text="${proyecto.titulo}"></span>
+								<a th:href="@{'/proyecto/' + ${proyecto.id}}" class="proyectoLink"><span th:text="${proyecto.titulo}"></span></a>
 							</div>
 							<div class="skillbar-bar" style="background: #25b0e1;"></div>
 							<div class="skill-bar-percent" th:with="porcentaje=${proyecto.importe}+'%'" th:text="${porcentaje}"></div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="well">
-							<h2>Visitantes</h2>
-							<div id="visitas">
-								<span class="count">200</span>
+				<div class="well">
+					<h2>Opiniones</h2>
+					<div class="row comentario" th:each="opinion : ${empresa.opinionTo}">
+						<div class="col-sm-1">
+							<div class="thumbnail">
+								<img class="img-responsive user-photo"
+									src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 							</div>
+							<!-- /thumbnail -->
 						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="well">
-							<h2>Mensajes pendientes</h2>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="well">
-							<h2>Últimas noticias</h2>
+						<!-- /col-sm-1 -->
 
+						<div class="col-sm-11">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<strong th:text="${opinion.userFrom.nombre}"></strong> comentado a fecha: <span class="text-muted" th:text="${#dates.format(opinion.fecha, 'dd-MMM-yyyy')}"></span>
+								</div>
+								<div class="panel-body" th:text="${opinion.mensaje}"></div>
+								<!-- /panel-body -->
+							</div>
+							<!-- /panel panel-default -->
+						</div>
+						<!-- /col-sm-5 -->
+					</div>
+					<div class="row">
+						<div class="col-sm-4 col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<form th:action="@{'/guardarComentario/' + ${empresa.id}}" method="POST">
+										<textarea class="form-control counted" name="mensaje"
+											placeholder="Escribe aquí el comentario" rows="5"
+											style="margin-bottom: 10px;"></textarea>
+										<button class="btn btn-info" type="submit">Escribir comentario</button>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

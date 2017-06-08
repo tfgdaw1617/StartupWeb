@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,8 +48,8 @@ public class InversorController {
     @Autowired
     ToqueRepository toqueRepository;
 
-    @RequestMapping(value="/toque/{id}", method=RequestMethod.GET)
-    public String publicInversor(@PathVariable Long id, Model model) {
+    @RequestMapping(value="/toque/{id}", method=RequestMethod.POST)
+    public String publicInversor(@RequestParam("mensaje") String mensaje, @PathVariable Long id, Model model) {
     	User userInversor = userRepository.findOne(id);
     	Toque toque = new Toque();
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -53,6 +57,8 @@ public class InversorController {
  		User user = userRepository.findByEmail(email);	
     	toque.setEmpresa(user.getEmpresa());
     	toque.setInversor(userInversor.getInversor());
+    	toque.setFecha(new Date());
+    	toque.setMensaje(mensaje);
     	toqueRepository.save(toque);
     	return "redirect:/access";
     }
@@ -63,6 +69,8 @@ public class InversorController {
  		String email = auth.getName();
  		User user = userRepository.findByEmail(email);		
  		User inversor = userRepository.findOne(id);
+ 		inversor.setVisitas(inversor.getVisitas()+1);
+ 		userRepository.save(inversor);
  		List<Proyecto> proyectos = new ArrayList<>();
  		for(InversorProyecto ip : inversor.getInversor().getInversorProyectos()){
  			proyectos.add(ip.getProyecto());
@@ -75,11 +83,23 @@ public class InversorController {
     }
     
     @RequestMapping(value="/busquedaEmpresas", method=RequestMethod.GET)
-    public String busquedaEmpresas(Model model) {
+    public String busquedaEmpresasPost(Model model) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
  		String email = auth.getName();
  		User user = userRepository.findByEmail(email);
     	List<Proyecto> proyectos = (List<Proyecto>) proyectoRepository.findAll();
+    	model.addAttribute("user", user);
+    	model.addAttribute("proyectos", proyectos);
+    	model.addAttribute("filtro", new FiltroBusqueda());
+        return "Busqueda/busquedaEmpresas";
+    }
+    
+    @RequestMapping(value="/busquedaEmpresas", method=RequestMethod.POST)
+    public String busquedaEmpresas(@Valid FiltroBusqueda filtro, BindingResult bindingResult, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);
+    	List<Proyecto> proyectos = (List<Proyecto>) proyectoRepository.findByFiltro(filtro.getNombre(), filtro.getCantidad());
     	model.addAttribute("user", user);
     	model.addAttribute("proyectos", proyectos);
     	model.addAttribute("filtro", new FiltroBusqueda());
@@ -142,14 +162,26 @@ public class InversorController {
         inversorRepository.delete(id);
         return "redirect:/inversores";
     }
-
+    
+    @RequestMapping(value="/inversiones", method=RequestMethod.GET)
+	String Inversiones(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = auth.getName();
+		User user = userRepository.findByEmail(email);
+		List<InversorProyecto> ips = new ArrayList<>(user.getInversor().getInversorProyectos());
+		model.addAttribute("user", user);
+		model.addAttribute("ips", ips);
+    	model.addAttribute("filtro", new FiltroBusqueda());
+		return "Busqueda/Inversiones";
+	}
+    
     @RequestMapping(value="/inversores", method=RequestMethod.GET)
     public String inversoresList(Model model) {
         model.addAttribute("inversor", new Inversor());
         model.addAttribute("inversores", inversorRepository.findAll());
         return "inversores";
     }
-
+    
     @RequestMapping(value="/inversores", method=RequestMethod.POST)
     public String addIinversor(Inversor inversor, Model model) {
         inversorRepository.save(inversor);

@@ -47,6 +47,8 @@ public class User {
 	private byte[] imagen;
 	private String direccion;
 	private Long visitas;
+	private Set<Opinion> opinionTo;
+	private Set<Opinion> opinionFrom;
 	
 	public User() {
 		super();
@@ -193,6 +195,20 @@ public class User {
 	}
 	public void setVisitas(Long visitas) {
 		this.visitas = visitas;
+	}
+	@OneToMany(mappedBy = "userTo", cascade = CascadeType.ALL)
+	public Set<Opinion> getOpinionTo() {
+		return opinionTo;
+	}
+	public void setOpinionTo(Set<Opinion> opinionTo) {
+		this.opinionTo = opinionTo;
+	}
+	@OneToMany(mappedBy = "userFrom", cascade = CascadeType.ALL)
+	public Set<Opinion> getOpinionFrom() {
+		return opinionFrom;
+	}
+	public void setOpinionFrom(Set<Opinion> opinionFrom) {
+		this.opinionFrom = opinionFrom;
 	}
 
 }

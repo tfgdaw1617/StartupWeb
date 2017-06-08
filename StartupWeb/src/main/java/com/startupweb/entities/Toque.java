@@ -1,5 +1,6 @@
 package com.startupweb.entities;
 
+import java.util.Date;
 //import java.util.List;
 //import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,13 +24,18 @@ public class Toque {
 	private long id;
 	private Inversor inversor;
 	private Empresa empresa;
-
+	private Date fecha;
+	@Column(length = 10000)
+	private String mensaje;
+	
 	public Toque() {
 	}
 
-	public Toque(Inversor inversor, Empresa empresa) {
-
-
+	public Toque(Inversor inversor, Empresa empresa, Date fecha, String mensaje) {
+		this.inversor = inversor;
+		this.fecha = fecha;
+		this.empresa = empresa;
+		this.mensaje = mensaje;
 	}
 
     @Id
@@ -59,6 +65,22 @@ public class Toque {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 
 }

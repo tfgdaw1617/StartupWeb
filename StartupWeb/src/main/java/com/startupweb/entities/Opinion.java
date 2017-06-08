@@ -1,5 +1,7 @@
 package com.startupweb.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,50 +11,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MENSAJE")
-public class Mensaje {
+@Table(name = "OPINION")
+public class Opinion {
 
 	private long id;
-	private Conversacion conversacion;
 	private User userTo;
 	private User userFrom;
 	private String mensaje;
+	private Date fecha;
 
-	public Mensaje() {
+	public Opinion() {
 	}
 
 	
 	
-    public Mensaje(Conversacion conversacion, User userTo, User userFrom, String mensaje) {
+    public Opinion( User userTo, User userFrom, String mensaje, Date fecha) {
 		super();
-		this.conversacion = conversacion;
 		this.userTo = userTo;
 		this.userFrom = userFrom;
 		this.mensaje = mensaje;
+		this.fecha = fecha;
 	}
 
 
 
 	@Id
     @GeneratedValue
-	@Column(name = "MENSAJE_ID")
+	@Column(name = "OPINION_ID")
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	@ManyToOne
-    @JoinColumn(name = "CONVERSACION_ID")
-	public Conversacion getConversacion() {
-		return conversacion;
-	}
-
-
-	public void setConversacion(Conversacion conversacion) {
-		this.conversacion = conversacion;
 	}
 
 	@ManyToOne
@@ -89,6 +80,18 @@ public class Mensaje {
 
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 }

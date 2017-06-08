@@ -30,9 +30,9 @@
 					<h2>Información específica</h2>
 					<div class="row" id="infoEmpresa">
 						<div class="col-sm-4">
-							<img src="../static/images/logos/SW_Entero_Blue.png" th:src="@{/images/profile/default.png}" width="25px"
-								id="imgPerfil" class="img-responsive"
-								alt="Logo empresa" />
+							<img src="../static/images/logos/SW_Entero_Blue.png"
+								th:src="@{/images/profile/default.png}" width="25px"
+								id="imgPerfil" class="img-responsive" alt="Logo empresa" />
 
 						</div>
 						<div class="col-sm-4" style="text-align: left">
@@ -43,30 +43,108 @@
 							<p>
 								Teléfono: <span th:text="${inversor.telefono}"></span>
 							</p>
-							<p>DNI: <span th:text="${inversor.inversor.dni}"></span></p>
+							<p>
+								DNI: <span th:text="${inversor.inversor.dni}"></span>
+							</p>
 							<p>Proyectos Activos: 3</p>
 						</div>
 						<div class="col-sm-4" style="text-align: left">
-							<a type="button" th:href="@{'/toque/' + ${inversor.id}}" class="btn btn-info btn-lg" >¿Dar toque!</a>
+							<a type="button" data-toggle="modal" data-target="#myModal"
+								class="btn btn-info btn-lg">¿Dar toque!</a>
 						</div>
 					</div>
 				</div>
 				<div class="well">
 					<h2>Proyectos activos</h2>
 					<div class="proyectoBar" th:each="proyecto : ${proyectos}">
-						<div class="skillbar clearfix " th:with="porcentaje=${proyecto.importe}+'%'" th:attr="data-percent=${porcentaje}" >
+						<div class="skillbar clearfix "
+							th:with="porcentaje=${proyecto.importe}+'%'"
+							th:attr="data-percent=${porcentaje}">
 							<div class="skillbar-title" style="background: #25b0e1;">
-								<span th:text="${proyecto.titulo}"></span>
+								<a class="proyectoLink"
+									th:href="@{'/proyecto/' + ${proyecto.id}}"><span
+									th:text="${proyecto.titulo}"></span></a>
 							</div>
 							<div class="skillbar-bar" style="background: #25b0e1;"></div>
-							<div class="skill-bar-percent" th:with="porcentaje=${proyecto.importe}+'%'" th:text="${porcentaje}"></div>
+							<div class="skill-bar-percent"
+								th:with="porcentaje=${proyecto.importe}+'%'"
+								th:text="${porcentaje}"></div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="well">
+					<h2>Opiniones</h2>
+					<div class="row comentario" th:each="opinion : ${inversor.opinionTo}">
+						<div class="col-sm-1">
+							<div class="thumbnail">
+								<img class="img-responsive user-photo"
+									src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+							</div>
+							<!-- /thumbnail -->
+						</div>
+						<!-- /col-sm-1 -->
 
+						<div class="col-sm-11">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<strong th:text="${opinion.userFrom.nombre}"></strong> comentado a fecha: <span class="text-muted" th:text="${#dates.format(opinion.fecha, 'dd-MMM-yyyy')}"></span>
+								</div>
+								<div class="panel-body" th:text="${opinion.mensaje}"></div>
+								<!-- /panel-body -->
+							</div>
+							<!-- /panel panel-default -->
+						</div>
+						<!-- /col-sm-5 -->
+					</div>
+					<div class="row">
+						<div class="col-sm-4 col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<form th:action="@{'/guardarComentario/' + ${inversor.id}}" method="POST">
+										<textarea class="form-control counted" name="mensaje"
+											placeholder="Escribe aquí el comentario" rows="5"
+											style="margin-bottom: 10px;"></textarea>
+										<button class="btn btn-info" type="submit">Escribir comentario</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{'/toque/' + ${inversor.id}}" method="POST">
+						<label for="comment">Escribe un mensaje para el inversor:</label>
+						<textarea class="form-control" name="mensaje" rows="5"
+							id="comment">Hola! Pásate por mi perfil para ver mis proyectos. Te gustarán!</textarea>
+						<!-- Button -->
+						<br />
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="reg"></label>
+							<div class="col-md-4">
+								<button id="reg" name="reg" class="btn btn-primary">Dar
+									toque!</button>
+							</div>
+						</div>
+						<br />
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </body>
