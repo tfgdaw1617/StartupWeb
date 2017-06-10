@@ -44,9 +44,9 @@
 						<div class="col-sm-4">
 							<h3 th:text="${proyecto.titulo}"></h3>
 							<h5 th:text="${proyecto.empresa.user.nombre}"></h5>
-							<h3 th:text="${proyecto.importe}"></h3>
+							<h3>Importe restante: <span th:text="${proyecto.importInicial - proyecto.importe}"></span></h3>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-4" th:if="${user.rol.descripcion} == 'INVERSOR'">
 									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
 									data-target="#myModal">Invertir</button><br /><br />
 									<a type="button" th:href="@{'/empresa/' + ${proyecto.empresa.user.id}}" class="btn btn-info btn-lg" >Ver empresa</a>
@@ -63,12 +63,15 @@
 				<div class="well">
 					<h2>Porcentaje realizado</h2>
 					<div class="proyectoBar">
-						<div class="skillbar clearfix " th:with="porcentaje=${proyecto.importe}+'%'" th:attr="data-percent=${porcentaje}" >
+						<div class="skillbar clearfix" 
+							th:attr="data-percent=${proyecto.porcentajeCompletado}+'%'">
 							<div class="skillbar-title" style="background: #25b0e1;">
-								<span th:text="${proyecto.titulo}"></span>
+								<a th:href="@{'/proyecto/' + ${proyecto.id}}"
+									class="proyectoLink"><span th:text="${proyecto.titulo}"></span></a>
 							</div>
 							<div class="skillbar-bar" style="background: #25b0e1;"></div>
-							<div class="skill-bar-percent" th:with="porcentaje=${proyecto.importe}+'%'" th:text="${porcentaje}"></div>
+							<div class="skill-bar-percent"
+								th:text="${proyecto.porcentajeCompletado} + '%'"></div>
 						</div>
 					</div>
 				</div>

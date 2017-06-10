@@ -28,6 +28,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -147,15 +148,12 @@ public class InversorController {
           inversorProyecto.setInversor(user.getInversor());
           inversorProyecto.setProyecto(proyecto);
 
-          if (proyecto.getImporte() > importe) {
-            inversorProyecto.setImporte(importe);;
-            proyecto.setImporte(proyecto.getImporte() - importe);
-            user.getInversor().setImporte(user.getInversor().getImporte()-importe);
-          } else {
-            inversorProyecto.setImporte(proyecto.getImporte());
-            user.getInversor().setImporte(user.getInversor().getImporte() - proyecto.getImporte());
-            proyecto.setImporte(0L);
-          }
+          inversorProyecto.setImporte(importe);;
+          proyecto.setImporte(proyecto.getImporte() + importe);
+          Double d = ((double) proyecto.getImporte()/ (double) proyecto.getImportInicial());
+          proyecto.setPorcentajeCompletado(d*100);
+          user.getInversor().setImporte(user.getInversor().getImporte() - importe);
+          
           inversorProyectoRepository.save(inversorProyecto);
           userRepository.save(user);
           proyectoRepository.save(proyecto);    

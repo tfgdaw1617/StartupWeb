@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -68,6 +69,8 @@ public class ProyectoController {
 
     @RequestMapping(value="/crearProyecto", method=RequestMethod.POST)
 	public String addProyecto(Proyecto p, Model model) {
+    	p.setImporte(0L);
+    	p.setPorcentajeCompletado(0D);
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
  		String email = auth.getName();
  		User user = userRepository.findByEmail(email);

@@ -1,5 +1,6 @@
 package com.startupweb.entities;
 
+import java.math.BigDecimal;
 //import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,16 +28,18 @@ public class Proyecto {
 	private Long importInicial;
 	private Set<InversorProyecto> proyectoInversores = new HashSet<>();
 	private Empresa empresa;
-
+	private Double porcentajeCompletado;
+	
     public Proyecto() {
     }
 
-    public Proyecto(String titulo, String descripcion, Long importe, Empresa empresa, Long importeInicial) {
+    public Proyecto(String titulo, String descripcion, Long importe, Empresa empresa, Long importeInicial, Double porcentajeCompletado) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.importe = importe;
 		this.empresa = empresa;
 		this.importInicial = importeInicial;
+		this.porcentajeCompletado =porcentajeCompletado;
 	}
 
     @Id
@@ -103,5 +106,13 @@ public class Proyecto {
 
 	public void setImportInicial(Long importInicial) {
 		this.importInicial = importInicial;
+	}
+
+	public Double getPorcentajeCompletado() {
+		return porcentajeCompletado;
+	}
+
+	public void setPorcentajeCompletado(Double porcentajeCompletado) {
+		this.porcentajeCompletado = porcentajeCompletado;
 	}
 }

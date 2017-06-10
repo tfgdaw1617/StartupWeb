@@ -54,12 +54,15 @@
 				<div class="well">
 					<h2>Proyectos activos</h2>
 					<div class="proyectoBar" th:each="proyecto : ${proyectos}">
-						<div class="skillbar clearfix " th:with="porcentaje=${proyecto.importe}+'%'" th:attr="data-percent=${porcentaje}" >
+						<div class="skillbar clearfix" 
+							th:attr="data-percent=${proyecto.porcentajeCompletado}+'%'">
 							<div class="skillbar-title" style="background: #25b0e1;">
-								<a th:href="@{'/proyecto/' + ${proyecto.id}}" class="proyectoLink"><span th:text="${proyecto.titulo}"></span></a>
+								<a th:href="@{'/proyecto/' + ${proyecto.id}}"
+									class="proyectoLink"><span th:text="${proyecto.titulo}"></span></a>
 							</div>
 							<div class="skillbar-bar" style="background: #25b0e1;"></div>
-							<div class="skill-bar-percent" th:with="porcentaje=${proyecto.importe}+'%'" th:text="${porcentaje}"></div>
+							<div class="skill-bar-percent"
+								th:text="${proyecto.porcentajeCompletado} + '%'"></div>
 						</div>
 					</div>
 				</div>
