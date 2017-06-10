@@ -105,11 +105,11 @@
 
 								<!-- Text input-->
 								<div class="form-group" th:if="${user.rol.descripcion} == 'INVERSOR'">
-									<label class="col-md-4 control-label" for="ph_cat">Cantidad a invertir</label>
-									<div class="col-md-6">
-										<input id="ph_cat" name="ph_cat" type="number"
-											placeholder="Cantidad a invertir"
-											class="form-control input-md" th:field="*{inversor.importe}" required="" th:value="${user.inversor.importe}"/>
+									<label class="col-md-4 control-label" for="ph_cat"></label>
+									<div class="col-md-8">
+										<a  class="btn btn-default " 
+											name="submitb" th:href="@{/recargarImporte}" >Recargar cuenta</a>
+
 									</div>
 								</div>
 

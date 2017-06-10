@@ -61,10 +61,10 @@
 							</p>
 						</div>
 						<div class="col-sm-4" style="text-align: left">
-							<p>País: España</p>
-							<p>Población: Barcelona</p>
-							<p>Año fundación: 2017</p>
-							<p></p>
+							<div th:if="${user.rol.descripcion} == 'INVERSOR'" id="importeInversor">
+								<h2>Inversión</h2>
+								<h1 th:text="${user.inversor.importe}+ '€'"></h1>
+							</div>
 						</div>
 					</div>
 				</div>

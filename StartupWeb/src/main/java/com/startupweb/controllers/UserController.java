@@ -63,7 +63,6 @@ public class UserController {
 		user.setNombre(userChange.getNombre());
 		if(user.getRol().getDescripcion().equals("INVERSOR")){
 			user.getInversor().setApellido(userChange.getInversor().getApellido());
-			user.getInversor().setImporte(userChange.getInversor().getImporte());
 			user.getInversor().setDni(userChange.getInversor().getDni());
 		}else if(user.getRol().getDescripcion().equals("EMPRESA")){
 			user.getEmpresa().setCif(userChange.getEmpresa().getCif());

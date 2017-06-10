@@ -63,6 +63,28 @@ public class InversorController {
     	return "redirect:/access";
     }
     
+    @RequestMapping(value="/recargarImporte", method=RequestMethod.POST)
+    public String recargarImporte(@RequestParam("importe") Long importe, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);	
+ 		model.addAttribute("user", user);
+ 		if(user.getRol().getDescripcion().equals("INVERSOR")){
+ 			user.getInversor().setImporte(user.getInversor().getImporte()+importe);
+ 		}
+ 		userRepository.save(user);
+ 		return "redirect:/access";
+    }
+    
+    @RequestMapping(value="/recargarImporte", method=RequestMethod.GET)
+    public String recargarImporte(Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);	
+ 		model.addAttribute("user", user);
+ 		return "User/recargarImporte";
+    }
+    
     @RequestMapping(value="/inversor/{id}", method=RequestMethod.GET)
     public String darToque(@PathVariable Long id, Model model) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();

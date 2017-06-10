@@ -165,3 +165,11 @@ h2 span{
 		width: 70%; 
 	}
 }
+
+div#importeInversor {
+    border: 1px solid #219eca;
+    text-align: center;
+}
+div#importeInversor h1{
+	padding: 25px
+}
