@@ -88,7 +88,7 @@ public class InversorController {
     }
     
     @RequestMapping(value="/inversor/{id}", method=RequestMethod.GET)
-    public String darToque(@PathVariable Long id, Model model) {
+    public String listInversor(@PathVariable Long id, Model model) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
  		String email = auth.getName();
  		User user = userRepository.findByEmail(email);		
@@ -171,7 +171,7 @@ public class InversorController {
           inversorProyecto.setProyecto(proyecto);
 
           inversorProyecto.setEstado(1L);
-          if(importe >= proyecto.getImporte()){
+          if(importe >= (proyecto.getImportInicial()-proyecto.getImporte())){
         	  user.getInversor().setImporte(user.getInversor().getImporte() - (proyecto.getImportInicial()-proyecto.getImporte()));
         	  inversorProyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
         	  proyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());

@@ -49,16 +49,9 @@ public class ChatController {
 	String contactosChat(Model model) {
 		User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
 		List<User> contactos = new ArrayList<User>();
-		if(user.getRol().getDescripcion().equals("INVERSOR")){
-			for(InversorProyecto ip : user.getInversor().getInversorProyectos()){
-				contactos.add(ip.getProyecto().getEmpresa().getUser());
-			}
-		}else{
-			for(Proyecto p : user.getEmpresa().getProyectos()){
-				for(InversorProyecto ip : p.getProyectoInversores()){
-					contactos.add(ip.getInversor().getUser());
-				}
-			}
+		for(Conversacion c : user.getConversaciones()){
+			for(User u : c.getUsers())
+				if(u.getId()!=user.getId()) contactos.add(u);
 		}
 		model.addAttribute("contactos", contactos);
 		model.addAttribute("user", user);

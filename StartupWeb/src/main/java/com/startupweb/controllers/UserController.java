@@ -105,8 +105,8 @@ public class UserController {
     	opinion.setFecha(new Date());
     	opinionRepository.save(opinion);
     	if(user.getRol().getDescripcion().equals("INVERSOR"))
-    		return "redirect:/inversor/"+userTo.getId();
-    	else
     		return "redirect:/empresa/"+userTo.getId();
+    	else
+    		return "redirect:/inversor/"+userTo.getId();
     }
 }

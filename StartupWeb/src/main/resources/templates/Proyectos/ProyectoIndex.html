@@ -48,7 +48,9 @@
 						</div>
 						<div class="col-sm-4" th:if="${user.rol.descripcion} == 'INVERSOR'">
 									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-									data-target="#myModal">Invertir</button><br /><br />
+									data-target="#myModal" th:if="${proyecto.importInicial - proyecto.importe} > 0" >Invertir</button>
+									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+									data-target="#myModal" th:if="${proyecto.importInicial - proyecto.importe} == 0" disabled="disabled">Invertir</button><br /><br />
 									<a type="button" th:href="@{'/empresa/' + ${proyecto.empresa.user.id}}" class="btn btn-info btn-lg" >Ver empresa</a><br />
 									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
 									data-target="#historico" style="margin: 25px 0px 25px 0px">Ver mis inversiones</button><br />
@@ -109,7 +111,7 @@
 					</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 
