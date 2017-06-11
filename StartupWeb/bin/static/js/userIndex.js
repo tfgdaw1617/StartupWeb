@@ -1,6 +1,20 @@
+var ws;
+var stompClient;
+
 $(function() {
-	var $ppc = $('.progress-pie-chart'), percent = parseInt($ppc
-			.data('percent')), deg = 360 * percent / 100;
+	ws = new SockJS("/StartupWeb/chat");
+	stompClient = Stomp.over(ws);
+	stompClient.connect({}, function(frame){
+		stompClient.subscribe("/topic/mensajes", function(mensajeJSON){
+			var mensaje = mensajeJSON.body.split("::");
+			console.log("Received:" + mensaje[1]);			
+			document.getElementById("mensajes").innerHTML += "<div class='message'><p class='text-muted'>"+ mensaje[0] +"</p><span>" + mensaje[1] + "</span></div>";
+		});
+	}, function(error){
+		console.log("STOMP protocol error " + error);
+	});
+	
+	var $ppc = $('.progress-pie-chart'), percent = parseInt(100), deg = 360;
 	if (percent > 50) {
 		$ppc.addClass('gt-50');
 	}
@@ -37,3 +51,14 @@ $(function() {
 	});
 
 });
+
+
+function enviarMensaje(){
+
+	if(document.getElementById("inputText").value != null || document.getElementById("inputText").value != "" ){
+		var mensaje = "::" +$("#destinatario").text() + "::" + $("#user").text() + "::" +document.getElementById("inputText").value+ "::";
+		stompClient.send("/app/chat",{}, JSON.stringify(mensaje));
+		document.getElementById("inputText").value = "";
+	}
+	
+}

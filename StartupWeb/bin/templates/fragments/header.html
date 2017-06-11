@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+<script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <script
@@ -63,7 +67,7 @@
 								aria-hidden="true"></i> Busqueda</a></li>
 						<li class="menuItem"><a href="#" th:href="@{/ContactosChat}"><i
 								class="fa fa-paper-plane-o" aria-hidden="true"></i>
-								Conversaciones</a></li>
+								Conversaciones</a> <span id="pendientes"></span></li>
 						<li class="menuItem"><a href="#" th:href="@{/Configuracion}"><i
 								class="fa fa-user-circle-o" aria-hidden="true"></i> Mi cuenta</a></li>
 						<li class="menuItem"><a href="" th:href="@{/logout}"><i

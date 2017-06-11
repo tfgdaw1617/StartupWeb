@@ -1,3 +1,7 @@
+.message{
+	padding: 5px;
+	border-bottom:1px solid gray;
+}
 .well h2 {
     position: relative;
     top: 0px;

@@ -11,6 +11,9 @@
 <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 <script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
 <link href="../../static/css/userIndex.css"
 	th:href="@{/css/userIndex.css}" rel="stylesheet" media="screen" />
@@ -89,6 +92,10 @@
 								th:text="${proyecto.porcentajeCompletado} + '%'"></div>
 						</div>
 					</div>
+				</div>
+				<div class="well">
+					<h2>Mensajes pendientes</h2>
+					<div id="mensajes" style="padding-bottom: 5px"></div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">

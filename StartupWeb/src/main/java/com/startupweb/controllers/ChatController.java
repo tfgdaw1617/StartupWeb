@@ -120,7 +120,7 @@ public class ChatController {
 			conversacion.addMensaje(mensajeObj);
 		}
 		conversacionService.saveConversacion(conversacion);
-		return mensajeObj.getUserFrom().getNombre()+"::"+mensajeObj.getMensaje();
+		return mensajeObj.getUserFrom().getNombre()+"::"+mensajeObj.getMensaje()+"::"+mensajeObj.getUserFrom().getId();
 
 	}
 }

@@ -5,7 +5,6 @@
 var ws;
 var stompClient;
 window.onload = function(){
-	var username = /*[[${user.email}]]*/ 'Sebastian';
 	ws = new SockJS("/StartupWeb/chat");
 	stompClient = Stomp.over(ws);
 	stompClient.connect({}, function(frame){
