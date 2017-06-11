@@ -61,7 +61,8 @@
 							</p>
 						</div>
 						<div class="col-sm-4" style="text-align: left">
-							<div th:if="${user.rol.descripcion} == 'INVERSOR'" id="importeInversor">
+							<div th:if="${user.rol.descripcion} == 'INVERSOR'"
+								id="importeInversor">
 								<h2>Inversión</h2>
 								<h1 th:text="${user.inversor.importe}+ '€'"></h1>
 							</div>
@@ -72,12 +73,12 @@
 					<h2 th:text="${user.nombre}"></h2>
 					<div style="padding: 25px">
 						<p th:text="${user.descripcion}"></p>
-					</div>					
+					</div>
 				</div>
 				<div class="well">
 					<h2>Proyectos activos</h2>
 					<div class="proyectoBar" th:each="proyecto : ${proyectos}">
-						<div class="skillbar clearfix" 
+						<div class="skillbar clearfix"
 							th:attr="data-percent=${proyecto.porcentajeCompletado}+'%'">
 							<div class="skillbar-title" style="background: #25b0e1;">
 								<a th:href="@{'/proyecto/' + ${proyecto.id}}"
@@ -90,30 +91,46 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-6">
 						<div class="well">
 							<h2>Visitantes</h2>
 							<div id="visitas">
-								<span class="count" th:text="${user.visitas}"></span>
+								<div class="progress-pie-chart" data-percent="100">
+									<!--Pie Chart -->
+									<div class="ppc-progress">
+										<div class="ppc-progress-fill"></div>
+									</div>
+									<div class="ppc-percents">
+										<div class="pcc-percents-wrapper" th:text="${user.visitas}">
+
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-6" th:if="${user.rol.descripcion} == 'INVERSOR'">
 						<div class="well">
-							<h2>Mensajes pendientes</h2>
-						</div>
-					</div>
-					<div class="col-sm-4" th:if="${user.rol.descripcion} == 'INVERSOR'">
-						<div class="well">
-							<h2>
-								Toques<span data-toggle="modal" data-target="#modalToques">Ver
-									todos</span>
-							</h2>
-							<h1 th:text="${#lists.size(user.inversor.toques)}"
-								style="text-align: center"></h1>
+							<div id="toques">
+								<h2>
+									Toques<span data-toggle="modal" data-target="#modalToques">Ver
+										todos</span>
+								</h2>
+								<div class="progress-pie-chart" data-percent="100">
+									<!--Pie Chart -->
+									<div class="ppc-progress">
+										<div class="ppc-progress-fill"></div>
+									</div>
+									<div class="ppc-percents">
+										<div class="pcc-percents-wrapper"
+											th:text="${#lists.size(user.inversor.toques)}"></div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="well">
 					<h2>Opiniones</h2>
 					<div class="row comentario" th:each="opinion : ${user.opinionTo}">
@@ -129,7 +146,9 @@
 						<div class="col-sm-11">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<strong th:text="${opinion.userFrom.nombre}"></strong> comentado a fecha: <span class="text-muted" th:text="${#dates.format(opinion.fecha, 'dd-MMM-yyyy')}"></span>
+									<strong th:text="${opinion.userFrom.nombre}"></strong>
+									comentado a fecha: <span class="text-muted"
+										th:text="${#dates.format(opinion.fecha, 'dd-MMM-yyyy')}"></span>
 								</div>
 								<div class="panel-body" th:text="${opinion.mensaje}"></div>
 								<!-- /panel-body -->
