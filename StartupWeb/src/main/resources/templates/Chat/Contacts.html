@@ -17,8 +17,6 @@
 <script src="../static/js/contacts.js" th:src="@{/js/contacts.js}"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link href="../../static/css/style.css"
-	th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
 </head>
 <body>
 	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
@@ -36,51 +34,21 @@
 									placeholder="Busca en tu red de contactos" />
 							</div>
 							<div class="searchable-container">
-								<div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
-									<div class="info-block block-info clearfix">
-										<div class="square-box pull-left">
-											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
+								<th:block th:each="contacto : ${contactos}">
+									<div
+										class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
+										<div class="info-block block-info clearfix">
+											<div class="square-box pull-left">
+												<span class="glyphicon glyphicon-user glyphicon-lg"></span>
+											</div>
+											<h5 th:text="${contacto.nombre}"></h5>
+											<h4 th:text="${contacto.telefono}"></h4>
+											<p th:text="${contacto.email}"></p>
+											<a href="#" th:href="@{/Mensajes/{idDestinatario}(idDestinatario=${contacto.id})}">Abrir
+												conversación</a>
 										</div>
-										<h5>Empresa 1</h5>
-										<h4>Nombre: Carlos A</h4>
-										<p>Cargo: Director</p>
-										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
 									</div>
-								</div>
-								<div
-									class="items col-xs-12 col-sm-12 col-md-6 col-lg-6 clearfix">
-									<div class="info-block block-info clearfix">
-										<div class="square-box pull-left">
-											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
-										</div>
-										<h5>Empresa 2</h5>
-										<h4>Nombre: Juan 2</h4>
-										<p>Cargo: General Manager</p>
-										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
-									</div>
-								</div>
-								<div class="items col-xs-12 col-sm-12 col-md-6 col-lg-6">
-									<div class="info-block block-info clearfix">
-										<div class="square-box pull-left">
-											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
-										</div>
-										<h5>Empresa 3</h5>
-										<h4>Nombre: Julio 3</h4>
-										<p>Cargo: Director financiero</p>
-										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
-									</div>
-								</div>
-								<div class="items col-xs-12 col-sm-12 col-md-6 col-lg-6">
-									<div class="info-block block-info clearfix">
-										<div class="square-box pull-left">
-											<span class="glyphicon glyphicon-user glyphicon-lg"></span>
-										</div>
-										<h5>Fundación 4</h5>
-										<h4>Nombre: Alejandro B</h4>
-										<p>Cargo: Director</p>
-										<a href="#" th:href="@{/Mensajes}">Abrir conversación</a>
-									</div>
-								</div>
+								</th:block>
 							</div>
 						</div>
 					</div>

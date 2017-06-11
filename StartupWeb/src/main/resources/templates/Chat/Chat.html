@@ -14,11 +14,14 @@
 <script src="../static/js/navbar.js" th:src="@{/js/navbar.js}"></script>
 <link href="../../static/css/chat.css" th:href="@{/css/chat.css}"
 	rel="stylesheet" media="screen" />
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 <script src="../static/js/userIndex.js" th:src="@{/js/userIndex.js}"></script>
+<script th:inline="javascript" src="../static/js/chat.js"
+	th:src="@{/js/chat.js}"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link href="../../static/css/style.css"
-	th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
 </head>
 <body>
 	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
@@ -31,36 +34,34 @@
 				<div class="well">
 					<div class="container">
 						<div class="row">
-							<div class="panel panel-default">
-								<div class="panel-heading"><a href="#" th:href="@{/ContactosChat}"><i class="fa fa-arrow-left" aria-hidden="true" style="font-size:20px; margin-right: 20px; color: white"></i></a>Conversación activa con Empresa 1</div>
-								<div class="panel-body">
-									<div class="container">
-										<div class="row message-bubble">
-											<p class="text-muted">User 1</p>
-											<span>bla bla bla bla bla bla</span>
-										</div>
-										<div class="row message-bubble">
-											<p class="text-muted">Empresa 2</p>
-											<p>bla bla bla bla bla bla</p>
-										</div>
-										<div class="row message-bubble">
-											<p class="text-muted">User 1</p>
-											<p>bla bla bla bla bla bla</p>
-										</div>
-										<div class="row message-bubble">
-											<p class="text-muted">Empresa 1</p>
-											<p>bla bla bla bla bla bla</p>
-										</div>
-									</div>
-									<div class="panel-footer">
+							<div class="panel panel-default" style="height: 90vh">
+								<div class="panel-heading" style="height: 10vh" >
+									<a href="#" th:href="@{/ContactosChat}"><i
+										class="fa fa-arrow-left" aria-hidden="true"
+										style="font-size: 20px; margin-right: 20px; color: white"></i></a><span
+										id="destinatario" th:text="${userTo.id}"></span>-<span
+										id="destinatario" th:text="${userTo.nombre}"></span><span
+										th:text="${user.email}" id="user" style="float: right"></span>
+								</div>
+								<div class="panel-body" style="height: 70vh; overflow:scroll">
+									<div class="container" id="messages">
+										<th:block th:each="mensaje : ${mensajes}">
+											<div class="row message-bubble">
+												<p class="text-muted" th:text="${mensaje.userFrom.nombre}"></p>
+												<span th:text="${mensaje.mensaje}"></span>
+											</div>
+										</th:block>
+									</div>									
+								</div>
+								<div class="panel-footer">
 										<div class="input-group">
-											<input type="text" class="form-control" /> <span
+											<input type="text" class="form-control" id="inputText" /> <span
 												class="input-group-btn">
-												<button class="btn btn-default" type="button">Send</button>
+												<button class="btn btn-default" type="button"
+													id="sendButton">Send</button>
 											</span>
 										</div>
 									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -68,5 +69,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- <div style="display: none;" th:text="${userTo.email}" id="userToEmail"></div>
+	<div style="display: none;" th:text="${user.email}" id="userFromEmail"></div> -->
 </body>
 </html>

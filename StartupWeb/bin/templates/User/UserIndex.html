@@ -69,6 +69,12 @@
 					</div>
 				</div>
 				<div class="well">
+					<h2 th:text="${user.nombre}"></h2>
+					<div style="padding: 25px">
+						<p th:text="${user.descripcion}"></p>
+					</div>					
+				</div>
+				<div class="well">
 					<h2>Proyectos activos</h2>
 					<div class="proyectoBar" th:each="proyecto : ${proyectos}">
 						<div class="skillbar clearfix" 

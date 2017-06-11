@@ -1,5 +1,6 @@
 package com.startupweb.controllers;
 
+import com.startupweb.entities.InversorProyecto;
 import com.startupweb.entities.Proyecto;
 import com.startupweb.entities.User;
 import com.startupweb.repository.ProyectoRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,6 +42,15 @@ public class ProyectoController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User user = userRepository.findByEmail(email);
+		if(user.getRol().getDescripcion().equals("INVERSOR")){
+		List<InversorProyecto> historicos = new ArrayList<InversorProyecto>();
+		for(InversorProyecto ip : user.getInversor().getInversorProyectos()){
+				if(ip.getProyecto().equals(proyecto)){
+					historicos.add(ip);
+				}
+			}
+			model.addAttribute("historicos",historicos);
+		}
         model.addAttribute("proyecto", proyecto);
         model.addAttribute("user", user);
         return "Proyectos/ProyectoIndex";

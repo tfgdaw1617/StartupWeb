@@ -7,4 +7,5 @@ public interface UserService {
 	public void saveUser(User user);
 	public void saveEmpresa(User user);
 	public void saveInversor(User user);
+	public 	User findById(long id);
 }

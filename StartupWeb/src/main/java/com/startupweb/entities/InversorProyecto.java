@@ -23,6 +23,7 @@ public class InversorProyecto {
 	private InversorProyectoId id = new InversorProyectoId();
     private Date fechaRegistro = new Date();
     private Long importe;
+    private Long estado;
 
     @EmbeddedId
 	public InversorProyectoId getId() {
@@ -68,5 +69,13 @@ public class InversorProyecto {
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+	public Long getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Long estado) {
+		this.estado = estado;
+	}
 
 }

@@ -7,6 +7,7 @@ import com.startupweb.entities.Proyecto;
 import com.startupweb.entities.Toque;
 import com.startupweb.entities.User;
 import com.startupweb.entities.InversorProyecto;
+import com.startupweb.entities.InversorProyectoId;
 import com.startupweb.repository.ProyectoRepository;
 import com.startupweb.repository.ToqueRepository;
 import com.startupweb.repository.UserRepository;
@@ -135,7 +136,28 @@ public class InversorController {
         model.addAttribute("proyectos", proyectoRepository.findAll());
         return "inversor";
     }
-
+    
+    @RequestMapping(value="/retirarInversion/{id}/{importe}", method=RequestMethod.GET)
+    public String retirarInversion(@PathVariable Long id,@PathVariable Long importe, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String email = auth.getName();
+ 		User user = userRepository.findByEmail(email);
+ 		Proyecto p = proyectoRepository.findOne(id);
+    	for(InversorProyecto ip : user.getInversor().getInversorProyectos()){
+    		if(ip.getId().getProyecto().equals(p) && ip.getId().getInversor().equals(user.getInversor()) && ip.getImporte().equals(importe)){    		
+    			user.getInversor().getInversorProyectos().remove(ip);
+    			user.getInversor().setImporte(user.getInversor().getImporte()+ip.getImporte());
+    			p.setImporte(p.getImporte()-ip.getImporte());
+    			Double d = ((double) p.getImporte()/ (double) p.getImportInicial());
+    	        p.setPorcentajeCompletado(d*100);
+    	        proyectoRepository.save(p);
+    			userRepository.save(user);
+    		}
+    	}
+        Long idProyecto = p.getId();
+        return "redirect:/proyecto/"+idProyecto;
+    }
+    
     @RequestMapping(value="/addproyecto/{id}", method=RequestMethod.POST)
     public String inversorAddProyecto(@RequestParam("importe") Long importe, @PathVariable Long id, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -148,11 +170,21 @@ public class InversorController {
           inversorProyecto.setInversor(user.getInversor());
           inversorProyecto.setProyecto(proyecto);
 
-          inversorProyecto.setImporte(importe);;
-          proyecto.setImporte(proyecto.getImporte() + importe);
+          inversorProyecto.setEstado(1L);
+          if(importe >= proyecto.getImporte()){
+        	  user.getInversor().setImporte(user.getInversor().getImporte() - (proyecto.getImportInicial()-proyecto.getImporte()));
+        	  inversorProyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
+        	  proyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
+          }else{
+        	  inversorProyecto.setImporte(importe);
+        	  proyecto.setImporte(proyecto.getImporte() + importe);
+        	  user.getInversor().setImporte(user.getInversor().getImporte()-importe);
+          }
+          
           Double d = ((double) proyecto.getImporte()/ (double) proyecto.getImportInicial());
           proyecto.setPorcentajeCompletado(d*100);
-          user.getInversor().setImporte(user.getInversor().getImporte() - importe);
+          
+          
           
           inversorProyectoRepository.save(inversorProyecto);
           userRepository.save(user);

@@ -32,6 +32,7 @@ public class User {
 	@NotEmpty(message = "*Please provide your passwordword")
 	private String password;
 	private String telefono;
+	private String descripcion;
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
@@ -59,12 +60,13 @@ public class User {
 		this.password = password;
 		this.active = active;
 	}
-	public User(String nombre, String password, String telefono, String email, Rol rol, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo, int active, byte[] imagen, String direccion, Long visitas) {
+	public User(String nombre, String password, String telefono, String email, String descripcion, Rol rol, Inversor inversor, Empresa empresa, Set<Conversacion> conversaciones, Set<Mensaje> mensajesFrom,Set<Mensaje> mensajesTo, int active, byte[] imagen, String direccion, Long visitas) {
 		super();
 		this.nombre = nombre;
 		this.password = password;
 		this.telefono = telefono;
 		this.email = email;
+		this.descripcion = descripcion;
 		this.rol = rol;
 		this.inversor = inversor;
 		this.empresa = empresa;
@@ -209,6 +211,15 @@ public class User {
 	}
 	public void setOpinionFrom(Set<Opinion> opinionFrom) {
 		this.opinionFrom = opinionFrom;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public void addConversacion(Conversacion conversacion){
+		this.conversaciones.add(conversacion);
 	}
 
 }

@@ -20,40 +20,44 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form class="form-horizontal" th:action="@{/accesoEmpresa}" method="POST" th:object="${user}">
+			<form class="form-horizontal" th:action="@{/accesoEmpresa}"
+				method="POST" th:object="${user}" id="userForm">
 				<fieldset>
 
 					<!-- Form Name -->
 					<h3>Introduce tus datos</h3>
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="nombre">Nombre de la empresa</label>
+						<label class="col-md-4 control-label" for="nombre">Nombre
+							de la empresa</label>
 						<div class="col-md-4">
-							<input id="nombre" name="nombre" th:field="*{nombre}" type="text" placeholder="Nombre"
-								class="form-control input-md" />
+							<input id="nombre" name="nombre" th:field="*{nombre}" type="text"
+								placeholder="Nombre" class="form-control input-md" />
 
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="email">Correo electrónico</label>
+						<label class="col-md-4 control-label" for="email">Correo
+							electrónico</label>
 						<div class="col-md-4">
-							<input id="email" name="email" type="email" th:field="*{email}"  placeholder="Correo electrónico"
-								class="form-control input-md" />
+							<input id="email" name="email" type="email" th:field="*{email}"
+								placeholder="Correo electrónico" class="form-control input-md" />
 
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="cif">CIF</label>
 						<div class="col-md-4">
-							<input id="cif" name="cif" th:field="*{empresa.cif}" type="text" placeholder="CIF"
-								class="form-control input-md" />
+							<input id="cif" name="cif" th:field="*{empresa.cif}" type="text"
+								placeholder="CIF" class="form-control input-md" />
 
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="direccion">Dirección</label>
 						<div class="col-md-4">
-							<input id="direccion" name="dieccion" th:field="*{direccion}" type="text" placeholder="Introduce tu dirección"
+							<input id="direccion" name="dieccion" th:field="*{direccion}"
+								type="text" placeholder="Introduce tu dirección"
 								class="form-control input-md" />
 
 						</div>
@@ -61,27 +65,35 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="cif">Teléfono</label>
 						<div class="col-md-4">
-							<input id="telefono" name="telefono" th:field="*{telefono}" type="text" placeholder="Teléfono"
+							<input id="telefono" name="telefono" th:field="*{telefono}"
+								type="text" placeholder="Teléfono" class="form-control input-md" />
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="phone">Contraseña</label>
+						<div class="col-md-4">
+							<input id="password" name="password" type="password"
+								th:field="*{password}" placeholder="Contraseña"
 								class="form-control input-md" />
 
 						</div>
 					</div>
 					
-					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="phone">Contraseña</label>
-						<div class="col-md-4">
-							<input id="password" name="password" type="password" th:field="*{password}" placeholder="Contraseña"
-								class="form-control input-md" />
-
-						</div>
+						<label for="descripcion">Descripción</label>
+						<textarea class="form-control" rows="10" name="comment"
+							th:field="*{descripcion}" form="userForm">Enter text here...</textarea>
 					</div>
 					
 					<!-- Button -->
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="reg"></label>
-						<div class="col-md-4"> 
-							<button id="reg" name="reg" class="btn btn-primary">Registrar empresa</button>
+						<div class="col-md-4">
+							<button id="reg" name="reg" class="btn btn-primary">Registrar
+								empresa</button>
 						</div>
 					</div>
 

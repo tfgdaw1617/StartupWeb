@@ -61,6 +61,7 @@ public class UserController {
 		user.setEmail(userChange.getEmail());
 		user.setTelefono(userChange.getTelefono());
 		user.setNombre(userChange.getNombre());
+		user.setDescripcion(userChange.getDescripcion());
 		if(user.getRol().getDescripcion().equals("INVERSOR")){
 			user.getInversor().setApellido(userChange.getInversor().getApellido());
 			user.getInversor().setDni(userChange.getInversor().getDni());

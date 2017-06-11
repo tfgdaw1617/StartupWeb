@@ -1,5 +1,7 @@
 package com.startupweb.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,18 +19,20 @@ public class Mensaje {
 	private User userTo;
 	private User userFrom;
 	private String mensaje;
+	private Date fecha;
 
 	public Mensaje() {
 	}
 
 	
 	
-    public Mensaje(Conversacion conversacion, User userTo, User userFrom, String mensaje) {
+    public Mensaje(Conversacion conversacion, User userTo, User userFrom, String mensaje, Date fecha) {
 		super();
 		this.conversacion = conversacion;
 		this.userTo = userTo;
 		this.userFrom = userFrom;
 		this.mensaje = mensaje;
+		this.setFecha(fecha);
 	}
 
 
@@ -89,6 +93,18 @@ public class Mensaje {
 
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 }

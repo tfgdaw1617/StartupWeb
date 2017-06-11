@@ -27,7 +27,7 @@
 			<div class="col-sm-9">
 				<div class="well">
 					<div class="container">
-						<form class="form-horizontal" method="POST" th:action="@{/guardaCambios}" th:object="${user}">
+						<form class="form-horizontal" method="POST" id="userForm" th:action="@{/guardaCambios}" th:object="${user}">
 							<fieldset>
 
 								<!-- Form Name -->
@@ -85,7 +85,7 @@
 									<div class="col-md-6">
 										<input id="m_name" name="m_name" type="text"
 											placeholder="Teléfono" class="form-control input-md"
-											required="" th:value="${user.telefono}" th:field="*{telefono}" /> <span class="help-block"></span>
+											required="required" th:value="${user.telefono}" th:field="*{telefono}" /> <span class="help-block"></span>
 									</div>
 								</div>
 
@@ -101,7 +101,11 @@
 											your from the calender </span>
 									</div>
 								</div>
-
+								
+								<div class="form-group">
+									<label for="descripcion">Descripción</label>
+									<textarea class="form-control" rows="10" name="comment" th:field="*{descripcion}" th:value="${user.descripcion}" form="userForm">Enter text here...</textarea>
+								</div>
 
 								<!-- Text input-->
 								<div class="form-group" th:if="${user.rol.descripcion} == 'INVERSOR'">

@@ -20,7 +20,8 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form class="form-horizontal" th:action="@{/accesoInversor}" method="POST" th:object="${user}" enctype="mulipart/form-data">
+			<form class="form-horizontal" th:action="@{/accesoInversor}"
+				method="POST" th:object="${user}" enctype="mulipart/form-data" id="userForm">
 				<fieldset>
 
 					<!-- Form Name -->
@@ -29,33 +30,35 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="name">Nombre</label>
 						<div class="col-md-4">
-							<input id="nombre" name="nombre" th:field="*{nombre}" type="text" placeholder="Nombre"
-								class="form-control input-md" />
+							<input id="nombre" name="nombre" th:field="*{nombre}" type="text"
+								placeholder="Nombre" class="form-control input-md" />
 
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="phone">Apellido</label>
 						<div class="col-md-4">
-							<input id="apellido" name="apellido" type="text" th:field="*{inversor.apellido}" placeholder="Apellido"
+							<input id="apellido" name="apellido" type="text"
+								th:field="*{inversor.apellido}" placeholder="Apellido"
 								class="form-control input-md" />
 
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="phone">DNI</label>
 						<div class="col-md-4">
-							<input id="dni" name="dni" type="text" th:field="*{inversor.dni}" placeholder="Introduce tu DNI"
-								class="form-control input-md" />
+							<input id="dni" name="dni" type="text" th:field="*{inversor.dni}"
+								placeholder="Introduce tu DNI" class="form-control input-md" />
 
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="direccion">Dirección</label>
 						<div class="col-md-4">
-							<input id="direccion" name="dieccion" th:field="*{direccion}" type="text" placeholder="Introduce tu dirección"
+							<input id="direccion" name="dieccion" th:field="*{direccion}"
+								type="text" placeholder="Introduce tu dirección"
 								class="form-control input-md" />
 
 						</div>
@@ -63,26 +66,29 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="cif">Teléfono</label>
 						<div class="col-md-4">
-							<input id="telefono" name="telefono" th:field="*{telefono}" type="text" placeholder="Teléfono"
-								class="form-control input-md" />
+							<input id="telefono" name="telefono" th:field="*{telefono}"
+								type="text" placeholder="Teléfono" class="form-control input-md" />
 
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="phone">Importe a invertir</label>
+						<label class="col-md-4 control-label" for="phone">Importe
+							a invertir</label>
 						<div class="col-md-4">
-							<input id="importe" name="importe" type="text" th:field="*{inversor.importe}" placeholder="Importe"
+							<input id="importe" name="importe" type="text"
+								th:field="*{inversor.importe}" placeholder="Importe"
 								class="form-control input-md" />
 
 						</div>
 					</div>
-					
+
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="email">Correo electrónico</label>
+						<label class="col-md-4 control-label" for="email">Correo
+							electrónico</label>
 						<div class="col-md-4">
-							<input id="email" name="email" type="email" th:field="*{email}"  placeholder="Correo electrónico"
-								class="form-control input-md" />
+							<input id="email" name="email" type="email" th:field="*{email}"
+								placeholder="Correo electrónico" class="form-control input-md" />
 
 						</div>
 					</div>
@@ -91,17 +97,24 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="phone">Contraseña</label>
 						<div class="col-md-4">
-							<input id="password" name="password" type="password" th:field="*{password}" placeholder="Contraseña"
+							<input id="password" name="password" type="password"
+								th:field="*{password}" placeholder="Contraseña"
 								class="form-control input-md" />
 
 						</div>
 					</div>
 
+					<div class="form-group">
+						<label for="descripcion">Descripción</label>
+						<textarea class="form-control" rows="10" name="comment"
+							th:field="*{descripcion}" form="userForm">Enter text here...</textarea>
+					</div>
 					<!-- Button -->
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="reg"></label>
 						<div class="col-md-4">
-							<button id="reg" name="reg" class="btn btn-primary">Registrar inversor</button> 
+							<button id="reg" name="reg" class="btn btn-primary">Registrar
+								inversor</button>
 						</div>
 					</div>
 

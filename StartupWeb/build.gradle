@@ -33,6 +33,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-security")
+	compile("org.springframework.boot:spring-boot-starter-websocket")
 	compile("mysql:mysql-connector-java")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compileOnly("org.springframework.boot:spring-boot-starter-tomcat")

@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 
@@ -19,6 +20,7 @@ public class Conversacion {
 
 	private long id;
 	private Set<User> users;
+	@OrderBy("fecha DESC")
 	private Set<Mensaje> mensajes;
 
 
@@ -64,6 +66,9 @@ public class Conversacion {
 
 	public void setMensajes(Set<Mensaje> mensajes) {
 		this.mensajes = mensajes;
+	}
+	public void addMensaje(Mensaje mensaje){
+		this.mensajes.add(mensaje);
 	}
 
 }
