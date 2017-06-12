@@ -80,8 +80,8 @@
 								<div class="thumbnail">
 									<img src="http://placehold.it/500x300" alt="" />
 									<div class="caption">
-										<h4 th:text="${inversor.user.nombre}"></h4>
-										<p th:text="${inversor.importe}"></p>
+										<h4><span th:text="${inversor.user.nombre}"></span> <span th:text="${inversor.apellido}"></span></h4>
+										<p>Importe: <span th:text="${inversor.importe}"></span>€</p>
 										<p>
 											<a th:href="@{'/inversor/' + ${inversor.user.id}}" class="btn btn-info btn-xs" role="button">Ver
 												inversor</a>

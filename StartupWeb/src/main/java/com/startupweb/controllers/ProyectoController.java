@@ -1,25 +1,22 @@
 package com.startupweb.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.startupweb.entities.InversorProyecto;
 import com.startupweb.entities.Proyecto;
 import com.startupweb.entities.User;
 import com.startupweb.repository.ProyectoRepository;
 import com.startupweb.repository.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.stereotype.Controller;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class ProyectoController {
@@ -42,15 +39,19 @@ public class ProyectoController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = auth.getName();
 		User user = userRepository.findByEmail(email);
-		if(user.getRol().getDescripcion().equals("INVERSOR")){
 		List<InversorProyecto> historicos = new ArrayList<InversorProyecto>();
+		if(user.getRol().getDescripcion().equals("INVERSOR")){		
 		for(InversorProyecto ip : user.getInversor().getInversorProyectos()){
-				if(ip.getProyecto().equals(proyecto)){
+				if(ip.getProyecto().getId()==proyecto.getId()){
 					historicos.add(ip);
 				}
+			}			
+		}else{
+			for(InversorProyecto ip : proyecto.getProyectoInversores()){
+				historicos.add(ip);
 			}
-			model.addAttribute("historicos",historicos);
 		}
+		model.addAttribute("historicos",historicos);
         model.addAttribute("proyecto", proyecto);
         model.addAttribute("user", user);
         return "Proyectos/ProyectoIndex";
@@ -81,7 +82,7 @@ public class ProyectoController {
     @RequestMapping(value="/crearProyecto", method=RequestMethod.POST)
 	public String addProyecto(Proyecto p, Model model) {
     	p.setImporte(0L);
-    	p.setPorcentajeCompletado(0D);
+    	p.setPorcentajeCompletado(0L);
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
  		String email = auth.getName();
  		User user = userRepository.findByEmail(email);

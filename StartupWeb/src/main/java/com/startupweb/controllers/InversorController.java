@@ -149,7 +149,7 @@ public class InversorController {
     			user.getInversor().setImporte(user.getInversor().getImporte()+ip.getImporte());
     			p.setImporte(p.getImporte()-ip.getImporte());
     			Double d = ((double) p.getImporte()/ (double) p.getImportInicial());
-    	        p.setPorcentajeCompletado(d*100);
+    	        p.setPorcentajeCompletado(Math.round(d*100));
     	        proyectoRepository.save(p);
     			userRepository.save(user);
     		}
@@ -166,30 +166,44 @@ public class InversorController {
     	Proyecto proyecto = proyectoRepository.findOne(id);
         
 
-          InversorProyecto inversorProyecto = new InversorProyecto();
-          inversorProyecto.setInversor(user.getInversor());
-          inversorProyecto.setProyecto(proyecto);
-
-          inversorProyecto.setEstado(1L);
-          if(importe >= (proyecto.getImportInicial()-proyecto.getImporte())){
-        	  user.getInversor().setImporte(user.getInversor().getImporte() - (proyecto.getImportInicial()-proyecto.getImporte()));
-        	  inversorProyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
-        	  proyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
-          }else{
-        	  inversorProyecto.setImporte(importe);
-        	  proyecto.setImporte(proyecto.getImporte() + importe);
-        	  user.getInversor().setImporte(user.getInversor().getImporte()-importe);
+          
+          Boolean contains = false;
+          for(InversorProyecto ip : user.getInversor().getInversorProyectos()){
+        	  if(ip.getProyecto().getId() == proyecto.getId()){        		  
+        		  contains = true;
+        		  if(importe >= (proyecto.getImportInicial()-proyecto.getImporte())){
+                	  user.getInversor().setImporte(user.getInversor().getImporte() - (proyecto.getImportInicial()-proyecto.getImporte()));
+                	  ip.setFechaRegistro(new Date());
+                	  ip.setImporte(ip.getImporte()+(proyecto.getImportInicial()-proyecto.getImporte()));
+                	  proyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
+                  }else{
+                	  ip.setImporte(ip.getImporte()+importe);                	  
+                	  proyecto.setImporte(proyecto.getImporte() + importe);
+                	  user.getInversor().setImporte(user.getInversor().getImporte()-importe);
+                  }
+        	  }
           }
-          
-          Double d = ((double) proyecto.getImporte()/ (double) proyecto.getImportInicial());
-          proyecto.setPorcentajeCompletado(d*100);
-          
-          
-          
-          inversorProyectoRepository.save(inversorProyecto);
+          if(!contains){
+        	  InversorProyecto inversorProyecto = new InversorProyecto();
+        	  inversorProyecto.setInversor(user.getInversor());
+              inversorProyecto.setProyecto(proyecto);
+              inversorProyecto.setEstado(1L);
+              if(importe >= (proyecto.getImportInicial()-proyecto.getImporte())){
+            	  user.getInversor().setImporte(user.getInversor().getImporte() - (proyecto.getImportInicial()-proyecto.getImporte()));
+            	  inversorProyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
+            	  proyecto.setImporte(proyecto.getImportInicial()-proyecto.getImporte());
+              }else{
+            	  inversorProyecto.setImporte(importe);
+            	  proyecto.setImporte(proyecto.getImporte() + importe);
+            	  user.getInversor().setImporte(user.getInversor().getImporte()-importe);
+              }                        
+      		  inversorProyecto.setFechaRegistro(new Date());
+              Double d = ((double) proyecto.getImporte()/ (double) proyecto.getImportInicial());
+              proyecto.setPorcentajeCompletado(Math.round(d*100));
+              inversorProyectoRepository.save(inversorProyecto);                            
+          }
           userRepository.save(user);
-          proyectoRepository.save(proyecto);    
-        model.addAttribute("inversores", inversorRepository.findAll());
+          proyectoRepository.save(proyecto);   
         return "redirect:/access";
     }
 

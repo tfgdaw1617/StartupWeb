@@ -31,7 +31,6 @@ letter-spacing: 1px;
 /* Set gray background color and 100% height */
 .sidenav {
 	background-color: #219eca;
-	box-shadow: 3px 0 6px 0px #219eca;
 	height: 100%;
 	position: fixed;
 	

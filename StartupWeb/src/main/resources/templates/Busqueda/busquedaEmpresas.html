@@ -80,7 +80,7 @@
 								<div class="thumbnail">
 									<img src="http://placehold.it/500x300" alt="" />
 									<div class="caption">
-										<h4>Nombre: <span th:text="${proyecto.titulo}"></span></h4>
+										<h4><span th:text="${proyecto.titulo}"></span></h4>
 										<p>Importe: <span th:text="${proyecto.importInicial - proyecto.importe}"></span> €</p>
 										<p>
 											<a th:href="@{'/proyecto/' + ${proyecto.id}}" class="btn btn-info btn-xs" role="button">Ver

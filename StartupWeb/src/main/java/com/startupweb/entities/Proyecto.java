@@ -28,12 +28,12 @@ public class Proyecto {
 	private Long importInicial;
 	private Set<InversorProyecto> proyectoInversores = new HashSet<>();
 	private Empresa empresa;
-	private Double porcentajeCompletado;
+	private Long porcentajeCompletado;
 	
     public Proyecto() {
     }
 
-    public Proyecto(String titulo, String descripcion, Long importe, Empresa empresa, Long importeInicial, Double porcentajeCompletado) {
+    public Proyecto(String titulo, String descripcion, Long importe, Empresa empresa, Long importeInicial, Long porcentajeCompletado) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.importe = importe;
@@ -108,11 +108,11 @@ public class Proyecto {
 		this.importInicial = importInicial;
 	}
 
-	public Double getPorcentajeCompletado() {
+	public Long getPorcentajeCompletado() {
 		return porcentajeCompletado;
 	}
 
-	public void setPorcentajeCompletado(Double porcentajeCompletado) {
+	public void setPorcentajeCompletado(Long porcentajeCompletado) {
 		this.porcentajeCompletado = porcentajeCompletado;
 	}
 }

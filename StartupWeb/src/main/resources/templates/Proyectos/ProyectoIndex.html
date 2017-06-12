@@ -16,7 +16,6 @@
 	src="/assets/script/jquery.canvasjs.min.js"></script>
 	<link href="../../static/css/userIndex.css"
 	th:href="@{/css/userIndex.css}" rel="stylesheet" media="screen" />
-<script src="../static/js/userIndex.js" th:src="@{/js/userIndex.js}"></script>
 <link href="../../static/css/proyectoIndex.css"
 	th:href="@{/css/proyectoIndex.css}" rel="stylesheet" media="screen" />
 <script src="../static/js/proyectoIndex.js"
@@ -44,7 +43,7 @@
 						<div class="col-sm-4">
 							<h3 th:text="${proyecto.titulo}"></h3>
 							<h5 th:text="${proyecto.empresa.user.nombre}"></h5>
-							<h3>Importe restante: <span th:text="${proyecto.importInicial - proyecto.importe}"></span></h3>
+							<h3>Importe restante: <span th:text="${proyecto.importInicial - proyecto.importe}"></span>€</h3>
 						</div>
 						<div class="col-sm-4" th:if="${user.rol.descripcion} == 'INVERSOR'">
 									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
@@ -53,7 +52,11 @@
 									data-target="#myModal" th:if="${proyecto.importInicial - proyecto.importe} == 0" disabled="disabled">Invertir</button><br /><br />
 									<a type="button" th:href="@{'/empresa/' + ${proyecto.empresa.user.id}}" class="btn btn-info btn-lg" >Ver empresa</a><br />
 									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-									data-target="#historico" style="margin: 25px 0px 25px 0px">Ver mis inversiones</button><br />
+									data-target="#historicoInversor" style="margin: 25px 0px 25px 0px">Ver mi inversión</button><br />
+						</div>
+						<div class="col-sm-4" th:if="${user.rol.descripcion} == 'EMPRESA'">
+									<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+									data-target="#historicoEmpresa" style="margin: 25px 0px 25px 0px">Ver inversiones</button><br />
 						</div>
 					</div>
 
@@ -111,7 +114,7 @@
 					</form>
 					</div>
 					<div class="modal-footer">
-						<button  type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button  type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					</div>
 				</div>
 
@@ -119,7 +122,7 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="historico" role="dialog" th:if="${user.rol.descripcion} == 'INVERSOR'">
+		<div class="modal fade" id="historicoInversor" role="dialog" th:if="${user.rol.descripcion} == 'INVERSOR'">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -151,7 +154,42 @@
 					</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="historicoEmpresa" role="dialog" th:if="${user.rol.descripcion} == 'EMPRESA'">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Datos de la inversión</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Inversor</th>
+								<th>Importe</th>
+								<th>Fecha</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="ip : ${historicos}">
+								<td><span th:text="${ip.id.inversor.user.nombre}"></span> <span th:text="${ip.id.inversor.apellido}"></span></td>
+								<td><span th:text="${ip.importe}"></span>€</td>
+								<td th:text=" ${#dates.format(ip.fechaRegistro, 'dd-MMM-yyyy')}"></td>																						
+							</tr>
+						</tbody>
+					</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					</div>
 				</div>
 
