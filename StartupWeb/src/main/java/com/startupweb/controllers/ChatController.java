@@ -28,6 +28,7 @@ import com.startupweb.entities.InversorProyecto;
 import com.startupweb.entities.Mensaje;
 import com.startupweb.entities.User;
 import com.startupweb.repository.ConversacionRepository;
+import com.startupweb.repository.MensajeRepository;
 import com.startupweb.repository.UserRepository;
 import com.startupweb.entities.Proyecto;
 import com.startupweb.service.ConversacionService;
@@ -42,6 +43,9 @@ public class ChatController {
 	
 	@Autowired
 	private ConversacionRepository conversacionRespository;
+	
+	@Autowired
+	private MensajeRepository mensajeRespository;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -88,10 +92,15 @@ public class ChatController {
 			userFrom.addConversacion(conversacion);
 			userTo.addConversacion(conversacion);
 			conversacionService.saveConversacion(conversacion);
-//			userService.saveUser(userFrom);			
+		
 		}
-		List<Mensaje> m = conversacionRespository.findMensajesById(conversacion.getId());
-		model.addAttribute("mensajes", m);
+		List<Mensaje> mNoLeido = mensajeRespository.findMensajesNoLeidos(userFrom.getId());
+		for(Mensaje m : mNoLeido){
+			m.setEstado(1);
+			mensajeRespository.save(m);
+		}
+		List<Mensaje> mensajes = mensajeRespository.findMensajesById(conversacion.getId());
+		model.addAttribute("mensajes", mensajes);
 		model.addAttribute("user", userFrom);
 		model.addAttribute("userTo", userTo);
 		return "Chat/Chat";
@@ -111,7 +120,7 @@ public class ChatController {
 				}
 			}
 		}
-		Mensaje mensajeObj = new Mensaje(conversacion,userTo, user, mensaje[3], new Date());
+		Mensaje mensajeObj = new Mensaje(conversacion,userTo, user, mensaje[3], new Date(),0);
 		if(conversacion.getMensajes()==null){
 			Set<Mensaje> mensajes = new HashSet<>();
 			mensajes.add(mensajeObj);

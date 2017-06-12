@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.startupweb.entities.InversorProyecto;
+import com.startupweb.entities.Mensaje;
 import com.startupweb.entities.Proyecto;
 import com.startupweb.entities.User;
+import com.startupweb.repository.MensajeRepository;
 import com.startupweb.repository.ToqueRepository;
 import com.startupweb.repository.UserRepository;
 
@@ -25,6 +27,9 @@ public class LoginController {
 	
 	@Autowired
 	ToqueRepository toqueRepository;
+	
+	@Autowired
+	MensajeRepository mensajeRepository;
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public static String Login(Model model){
@@ -47,6 +52,8 @@ public class LoginController {
 		if(user.getRol().getDescripcion().equals("INVERSOR")){
 			model.addAttribute("toques", toqueRepository.findToquesByUser(user.getId()));
 		}
+		List<Mensaje> mensajesNoLeidos = mensajeRepository.findMensajesNoLeidos(user.getId());
+		model.addAttribute("mensajes", mensajesNoLeidos);
 		model.addAttribute("proyectos", proyectos);
 		model.addAttribute("user", user);
 		/*byte[] encodeBase64 = Base64.encode(user.getImagen());

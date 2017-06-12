@@ -14,7 +14,4 @@ import com.startupweb.entities.User;
 public interface ConversacionRepository extends JpaRepository<Conversacion, Long> {
 	@Query("Select c from Conversacion c where :users = c.users")
 	Conversacion findByUsers(Set<User> users);
-	@Query("Select m from Mensaje m where :id = m.conversacion.id order by fecha ASC")
-	List<Mensaje> findMensajesById(@Param("id") Long id);
-	
 }

@@ -20,19 +20,21 @@ public class Mensaje {
 	private User userFrom;
 	private String mensaje;
 	private Date fecha;
+	private Integer estado;
 
 	public Mensaje() {
 	}
 
 	
 	
-    public Mensaje(Conversacion conversacion, User userTo, User userFrom, String mensaje, Date fecha) {
+    public Mensaje(Conversacion conversacion, User userTo, User userFrom, String mensaje, Date fecha, Integer estado) {
 		super();
 		this.conversacion = conversacion;
 		this.userTo = userTo;
 		this.userFrom = userFrom;
 		this.mensaje = mensaje;
 		this.setFecha(fecha);
+		this.estado = estado;
 	}
 
 
@@ -105,6 +107,18 @@ public class Mensaje {
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+
+
+	public Integer getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
 	}
 
 }

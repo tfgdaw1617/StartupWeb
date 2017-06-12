@@ -43,7 +43,11 @@
 
 						</div>
 						<div class="col-sm-4" style="text-align: left">
-							<h4 th:text="${user.nombre}"></h4>
+							<h4>
+								<span th:text="${user.nombre}"></span> <span
+									th:if="${user.rol.descripcion} == 'INVERSOR'"
+									th:text="${user.inversor.apellido}"></span>
+							</h4>
 							<p>
 								Dirección: <span th:text="${user.direccion}"></span>
 							</p>
@@ -56,9 +60,6 @@
 							<p th:if="${user.rol.descripcion} == 'INVERSOR'">
 								NIF: <span th:text="${user.inversor.dni}"></span>
 							</p>
-							<p th:if="${user.rol.descripcion} == 'EMPRESA'">
-								Proyectos activos: <span th:text="${#lists.size(proyectos)}"></span>
-							</p>
 							<p th:if="${user.rol.descripcion} == 'INVERSOR'">
 								Proyectos invertidos: <span th:text="${#lists.size(proyectos)}"></span>
 							</p>
@@ -68,6 +69,11 @@
 								id="importeInversor">
 								<h2>Inversión</h2>
 								<h1 th:text="${user.inversor.importe}+ '€'"></h1>
+							</div>
+							<div th:if="${user.rol.descripcion} == 'EMPRESA'"
+								id="importeInversor">
+								<h2>Total proyectos</h2>
+								<h1 th:text="${#lists.size(user.empresa.proyectos)}"></h1>
 							</div>
 						</div>
 					</div>
@@ -79,7 +85,7 @@
 					</div>
 				</div>
 				<div class="well">
-					<h2>Proyectos activos</h2>
+					<h2>Proyectos</h2>
 					<div class="proyectoBar" th:each="proyecto : ${proyectos}">
 						<div class="skillbar clearfix"
 							th:attr="data-percent=${proyecto.porcentajeCompletado}+'%'">
@@ -93,9 +99,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="well">
+				<div class="well" id="mensajesPendientes">
 					<h2>Mensajes pendientes</h2>
-					<div id="mensajes" style="padding-bottom: 5px"></div>
+					<div id="mensajes" style="padding-bottom: 5px">
+						<div id="listMensajes" th:each="mensaje : ${mensajes}">
+							<a
+								th:href="@{/Mensajes/{idDestinatario}(idDestinatario=${mensaje.userFrom.id})}">
+								<div class='message'>
+									<p class="text-muted" th:text="${mensaje.userFrom.nombre}"></p>
+									<span th:text="${mensaje.mensaje}"></span>
+								</div>
+							</a>
+						</div>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">

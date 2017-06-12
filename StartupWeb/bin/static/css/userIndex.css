@@ -2,6 +2,17 @@
 	padding: 5px;
 	border-bottom:1px solid gray;
 }
+#listMensajes a:focus,#listMensajes a:hover {
+    text-decoration: none;
+}
+.message:hover{
+	cursor:pointer;
+	background: #dcffff;
+}
+#mensajes{
+	max-height: 250px;
+	overflow:scroll;
+}
 .well h2 {
     position: relative;
     top: 0px;
