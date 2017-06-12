@@ -152,6 +152,7 @@ public class InversorController {
     	        p.setPorcentajeCompletado(Math.round(d*100));
     	        proyectoRepository.save(p);
     			userRepository.save(user);
+    			break;
     		}
     	}
         Long idProyecto = p.getId();
@@ -164,10 +165,10 @@ public class InversorController {
  		String email = auth.getName();
  		User user = userRepository.findByEmail(email);
     	Proyecto proyecto = proyectoRepository.findOne(id);
-        
-
-          
           Boolean contains = false;
+          if(importe>user.getInversor().getImporte()){
+        	  importe = user.getInversor().getImporte();
+          }
           for(InversorProyecto ip : user.getInversor().getInversorProyectos()){
         	  if(ip.getProyecto().getId() == proyecto.getId()){        		  
         		  contains = true;
